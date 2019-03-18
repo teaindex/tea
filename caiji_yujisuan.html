@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>预计算</title>
+        <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="content/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="content/css/index.css" rel="stylesheet" />
+        <link href="content/css/smoothness/jquery-ui.min.css" rel="stylesheet" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="/Content/js/html5shiv.js"></script>
+          <script src="/Content/js/respond.min.js"></script>
+        <![endif]-->
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><img src="resource/images/untitled.png" width="194" height="76"  style="margin-top: -5px;"/></a>
+                </div>
+                <div class="collapse navbar-collapse" id="nav">
+                    <ul class="nav navbar-nav">
+                        
+                        <li class=""><a href="/category">类目权重</a></li>
+                        <li class=""><a href="/indexround" >期次列表</a></li>
+                           <li class="dropdown active">
+                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">数据采集 <b class="caret"></b></a>
+                               <ul class="dropdown-menu">
+                                   <li><a href="/caiji/index">填报记录</a></li>
+                                   <li class="divider"></li>
+                                   <li><a href="/caiji/excel">导入表格</a></li>
+                                   <li><a href="/caiji/hand">填写价格</a></li>
+                               </ul>
+                            </li>
+                                                <li class="dropdown ">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">指标查看 <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                <li><a href="/priceindex/detaillist">多维条件查询</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/priceindex/index">指标查询</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown ">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">指标计算 <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/computer/index/day">计算日指数</a></li>    
+                                <li><a href="/computer/index/week">计算周指数</a></li>
+                                <li><a href="/computer/index/month">计算月指数</a></li>
+                                <li><a href="/computer/index/season">计算季指数</a></li>
+                                <li><a href="/computer/index/year">计算年指数</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/tempcomputer">预计算指数</a></li>    
+                            </ul>
+                        </li>    
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a class="user" href="/account/manage" title="管理">310000</a>
+                        </li>
+                        <li>
+<form action="/account/logOff" class="" id="logoutForm" method="post"><input name="__RequestVerificationToken" type="hidden" value="wmNQjO0871CnOUozfzgbtuy94Cz1q5Gk5dXLBgktE2oLj3Z0PaxlEkaI_tHVUSnIYnwfCn884x9O0h2L16qVijjopq17DpsBktrOgpCHV0s1" />                                      <button type="submit" class="logoff">注销</button>
+</form>                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container" id="content">
+            <div class="row">
+                <!-- 导入Excel -->
+        		<div class="col-md-8 col-lg-8 col-md-offset-2 col-sm-8">
+                    <div class="alert alert-info" style="margin-top: 10px">
+                        <strong>提示！</strong> 上传的excel文件名中需要包含日期（例如：2018-06-01批发市场价格.xls）,excel文件sheet1对应的A，B，C三列必须为“三级类别”，“x月x日销售量（kg）”，“x月x日销售额(元)”，下载模板后注意模板的名字中日期的修改
+                    </div>
+        			<form role="form" action="/caiji/importexcel" id="form" method="POST">
+        				<div class="form-group col-md-5 col-lg-5 col-md-offset-2 col-sm-5" style="float:left;">
+        					<label for="exampleInputFile">选择excel</label>
+        					<input type="file" id="file" name="file">
+        					<p class="help-block">上传并导入单日价格表</p>
+        				</div>
+        				<button type="button" id="sub" class="btn btn-primary floatleft">提交</button> 
+        				<a class="btn btn-default floatleft" href="/caiji/downloadexceltemp">下载模板</a> 
+        			</form>
+        		</div>
+            </div>
+            <div class="row">
+                <!-- 期次修改 -->
+                <div class="col-md-6 col-lg-6 col-md-offset-3 col-sm-6">
+                    <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>更改期次：</b> &nbsp; &nbsp;
+                    <input type="date" value="2019-02-01"/>
+                    <prep> &nbsp; &nbsp; — &nbsp; — &nbsp; &nbsp; </prep>
+                    <input type="date" value="2019-02-28"/></p>
+                </div>
+            </div>
+            <div class="row">
+                <!-- 首页图 -->
+                <div class="col-md-8 col-lg-8 col-md-offset-2 col-sm-8">
+                    <div id="chart" class="" style="height: 374px;margin-top: 10px;">    
+                    </div>
+                </div>
+            </div>
+            </div>
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="well well-sm">
+            <div class="col-md-offset-8">
+                <label>价格采集日期:</label>
+                <span>2018-06-02</span>
+                <!--a href="/caiji/export?dt=2018-06-02&amp;excel=2"  class="btn btn-primary">导出</a-->
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <table class="table table-bordered" id="table_data">
+            <tbody>
+                <tr class="r1">
+                <td class="c1">一级类别</td><td class="c1">一级销售额</td><td class="c1">一级权重</td><td class="c1">二级类别</td><td class="c1">二级销售额</td><td class="c1">二级权重</td><td class="c2">三级类别</td><td class="c2">三级销售额</td><td class="c2">三级权重</td><td class="c2">基期销售量（kg）</td><td class="c2">基期销售额（元）</td><td class="c1">基期价格（元/kg）</td><td class="c1">销售量（kg）</td><td class="c1">销售额(元)</td><td class="c1">平均价格</td><td class="c1">三级类指数</td><td class="c1">二级类指数</td><td class="c1">一级类指数</td><td class="c1">总指数</td>
+                </tr>
+                <tr class="r1">
+                <td class="c3" rowspan="29">绿茶</td><td class="c3" rowspan="29">13288345279</td><td class="c3" rowspan="29">88.52%</td><td class="c3" rowspan="26">名优绿茶</td><td class="c3" rowspan="26">11546655143</td><td class="c3" rowspan="26">86.89%</td><td class="c2">巴山雀舌</td><td class="c4">556800</td><td class="c2">0.00%</td><td class="c4">1740</td><td class="c4">556800</td><td class="c2">320.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c3" rowspan="26">81.20%</td><td class="c3" rowspan="29">79.51%</td><td class="c2" rowspan="49">85.15%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">邓村绿茶</td><td class="c4">1050000000</td><td class="c2">8.35%</td><td class="c4">3500000</td><td class="c4">1050000000</td><td class="c2">300.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">峨眉山茶</td><td class="c4">11527680</td><td class="c2">0.09%</td><td class="c4">30336</td><td class="c4">11527680</td><td class="c2">380.00</td><td class="c2">53</td><td class="c2">9400</td><td class="c2">177.36</td><td class="c2">46.67%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">贵州针</td><td class="c4">72825000</td><td class="c2">0.58%</td><td class="c4">243000</td><td class="c4">72825000</td><td class="c2">299.69</td><td class="c2">207.5</td><td class="c2">50200</td><td class="c2">241.93</td><td class="c2">80.73%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">汉中仙毫</td><td class="c4">75600000</td><td class="c2">0.60%</td><td class="c4">182000</td><td class="c4">75600000</td><td class="c2">415.38</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">黄山毛峰</td><td class="c4">360000000</td><td class="c2">2.86%</td><td class="c4">1300000</td><td class="c4">360000000</td><td class="c2">276.92</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">金坛雀舌</td><td class="c4">58800000</td><td class="c2">0.47%</td><td class="c4">49000</td><td class="c4">58800000</td><td class="c2">1200.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">卷曲形茶</td><td class="c4">547467900</td><td class="c2">4.35%</td><td class="c4">2013578</td><td class="c4">547467900</td><td class="c2">271.89</td><td class="c2">741</td><td class="c2">207107</td><td class="c2">279.50</td><td class="c2">102.80%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">六安瓜片</td><td class="c4">338000000</td><td class="c2">2.69%</td><td class="c4">1320000</td><td class="c4">338000000</td><td class="c2">256.06</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">马边绿茶</td><td class="c4">2171400</td><td class="c2">0.02%</td><td class="c4">7755</td><td class="c4">2171400</td><td class="c2">280.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">茅山青锋</td><td class="c4">98560000</td><td class="c2">0.78%</td><td class="c4">308000</td><td class="c4">98560000</td><td class="c2">320.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">湄潭翠芽</td><td class="c4">111199000</td><td class="c2">0.88%</td><td class="c4">121000</td><td class="c4">111199000</td><td class="c2">919.00</td><td class="c2">1.5</td><td class="c2">1200</td><td class="c2">800.00</td><td class="c2">87.05%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">湄潭毛峰</td><td class="c4">82620000</td><td class="c2">0.66%</td><td class="c4">340000</td><td class="c4">82620000</td><td class="c2">243.00</td><td class="c2">4</td><td class="c2">400</td><td class="c2">100.00</td><td class="c2">41.15%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">蒙顶甘露</td><td class="c4">7059000</td><td class="c2">0.06%</td><td class="c4">13575</td><td class="c4">7059000</td><td class="c2">520.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">蒙顶山茶</td><td class="c4">12888720</td><td class="c2">0.10%</td><td class="c4">35802</td><td class="c4">12888720</td><td class="c2">360.00</td><td class="c2">102</td><td class="c2">12925</td><td class="c2">126.72</td><td class="c2">35.20%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">蒲江雀舌</td><td class="c4">1360590</td><td class="c2">0.01%</td><td class="c4">4389</td><td class="c4">1360590</td><td class="c2">310.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">钱塘龙井</td><td class="c4">142520000</td><td class="c2">1.13%</td><td class="c4">367100</td><td class="c4">142520000</td><td class="c2">388.23</td><td class="c2">18</td><td class="c2">5760</td><td class="c2">320.00</td><td class="c2">82.42%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">四川扁形茶</td><td class="c4">2835835000</td><td class="c2">22.54%</td><td class="c4">5419500</td><td class="c4">2835835000</td><td class="c2">523.27</td><td class="c2">717</td><td class="c2">325081</td><td class="c2">453.39</td><td class="c2">86.65%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">松阳扁茶</td><td class="c4">373153202</td><td class="c2">2.97%</td><td class="c4">861538</td><td class="c4">373153202</td><td class="c2">433.12</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">松阳香茶</td><td class="c4">156800000</td><td class="c2">1.25%</td><td class="c4">1600000</td><td class="c4">156800000</td><td class="c2">98.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">条形茶</td><td class="c4">1730000000</td><td class="c2">13.75%</td><td class="c4">7000000</td><td class="c4">1730000000</td><td class="c2">247.14</td><td class="c2">702</td><td class="c2">223181</td><td class="c2">317.92</td><td class="c2">128.64%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">五峰绿茶</td><td class="c4">1</td><td class="c2">0.00%</td><td class="c4">1</td><td class="c4">1</td><td class="c2">1.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">信阳毛尖</td><td class="c4">1336400000</td><td class="c2">10.62%</td><td class="c4">2600000</td><td class="c4">1336400000</td><td class="c2">514.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">宜宾早茶</td><td class="c4">3608550</td><td class="c2">0.03%</td><td class="c4">10935</td><td class="c4">3608550</td><td class="c2">330.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">永川秀芽</td><td class="c4">23173200</td><td class="c2">0.18%</td><td class="c4">36900</td><td class="c4">23173200</td><td class="c2">628.00</td><td class="c2">89.19999695</td><td class="c2">38220</td><td class="c2">428.48</td><td class="c2">68.23%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">越州龙井</td><td class="c4">3146929100</td><td class="c2">25.02%</td><td class="c4">6130170</td><td class="c4">3146929100</td><td class="c2">513.35</td><td class="c2">1021</td><td class="c2">249850</td><td class="c2">244.71</td><td class="c2">47.67%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c3" rowspan="3">大宗绿茶</td><td class="c3" rowspan="3">1741690136</td><td class="c3" rowspan="3">13.11%</td><td class="c2">炒青绿茶</td><td class="c4">1524712600</td><td class="c2">87.54%</td><td class="c4">50012030</td><td class="c4">1524712600</td><td class="c2">30.49</td><td class="c2">83651</td><td class="c2">1742409</td><td class="c2">20.83</td><td class="c2">68.32%</td><td class="c3" rowspan="3">68.32%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">烘青绿茶</td><td class="c4">216683536</td><td class="c2">12.44%</td><td class="c4">4182365</td><td class="c4">216683536</td><td class="c2">51.81</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">蒸青绿茶</td><td class="c4">294000</td><td class="c2">0.02%</td><td class="c4">2100</td><td class="c4">294000</td><td class="c2">140.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c3" rowspan="7">红茶</td><td class="c3" rowspan="7">573439780</td><td class="c3" rowspan="7">3.82%</td><td class="c3" rowspan="5">工夫红茶</td><td class="c3" rowspan="5">496322380</td><td class="c3" rowspan="5">86.55%</td><td class="c2">川红工夫　</td><td class="c4">311359600</td><td class="c2">62.73%</td><td class="c4">1003090</td><td class="c4">311359600</td><td class="c2">310.40</td><td class="c2">495</td><td class="c2">132810</td><td class="c2">268.30</td><td class="c2">86.44%</td><td class="c3" rowspan="5">88.26%</td><td class="c3" rowspan="7">88.26%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">滇红工夫</td><td class="c4">45334280</td><td class="c2">9.13%</td><td class="c4">855360</td><td class="c4">45334280</td><td class="c2">53.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">宜红工夫</td><td class="c4">45000000</td><td class="c2">9.07%</td><td class="c4">450000</td><td class="c4">45000000</td><td class="c2">100.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">昭平红</td><td class="c4">37636000</td><td class="c2">7.58%</td><td class="c4">495200</td><td class="c4">37636000</td><td class="c2">76.00</td><td class="c2">5500</td><td class="c2">432000</td><td class="c2">78.55</td><td class="c2">103.35%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">遵义红</td><td class="c4">56992500</td><td class="c2">11.48%</td><td class="c4">121800</td><td class="c4">56992500</td><td class="c2">467.92</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">小种红茶</td><td class="c4">76500000</td><td class="c2">13.34%</td><td class="c2">松阳红茶</td><td class="c4">76500000</td><td class="c2">100.00%</td><td class="c4">510000</td><td class="c4">76500000</td><td class="c2">150.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">红碎茶</td><td class="c4">617400</td><td class="c2">0.11%</td><td class="c2">南川红碎茶</td><td class="c4">617400</td><td class="c2">100.00%</td><td class="c4">1470</td><td class="c4">617400</td><td class="c2">420.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c5" rowspan="2">乌龙茶</td><td class="c5" rowspan="2">354607930</td><td class="c5" rowspan="2">2.36%</td><td class="c5" rowspan="2">闽南乌龙</td><td class="c5" rowspan="2">354607930</td><td class="c5" rowspan="2">100.00%</td><td class="c6">安溪铁观音</td><td class="c4">332416500</td><td class="c6">93.74%</td><td class="c4">1624800</td><td class="c4">332416500</td><td class="c2">204.59</td><td class="c6">&nbsp;</td><td class="c6">&nbsp;</td><td class="c6">&nbsp;</td><td class="c2">&nbsp;</td><td class="c5" rowspan="2">&nbsp;</td><td class="c5" rowspan="2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c6">黄金桂</td><td class="c4">22191430</td><td class="c6">6.26%</td><td class="c4">487410</td><td class="c4">22191430</td><td class="c2">45.53</td><td class="c6">&nbsp;</td><td class="c6">&nbsp;</td><td class="c6">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c3" rowspan="7">黑茶</td><td class="c3" rowspan="7">754942119</td><td class="c3" rowspan="7">5.03%</td><td class="c3" rowspan="4">安化黑茶</td><td class="c3" rowspan="4">219200000</td><td class="c3" rowspan="4">29.04%</td><td class="c2">茯砖</td><td class="c4">102000000</td><td class="c2">46.53%</td><td class="c4">680000</td><td class="c4">102000000</td><td class="c2">150.00</td><td class="c2">28</td><td class="c2">4420</td><td class="c2">157.86</td><td class="c2">105.24%</td><td class="c3" rowspan="4">119.04%</td><td class="c3" rowspan="7">182.67%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">黑砖</td><td class="c4">12800000</td><td class="c2">5.84%</td><td class="c4">80000</td><td class="c4">12800000</td><td class="c2">160.00</td><td class="c2">27</td><td class="c2">4560</td><td class="c2">168.89</td><td class="c2">105.56%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">千两</td><td class="c4">70400000</td><td class="c2">32.12%</td><td class="c4">640000</td><td class="c4">70400000</td><td class="c2">110.00</td><td class="c2">59.25</td><td class="c2">7380</td><td class="c2">124.56</td><td class="c2">113.23%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">三尖</td><td class="c4">34000000</td><td class="c2">15.51%</td><td class="c4">200000</td><td class="c4">34000000</td><td class="c2">170.00</td><td class="c2">11</td><td class="c2">3320</td><td class="c2">301.82</td><td class="c2">177.54%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">四川黑茶</td><td class="c2">295350</td><td class="c2">0.04%</td><td class="c2">康砖</td><td class="c4">295350</td><td class="c2">100.00%</td><td class="c4">2187</td><td class="c4">295350</td><td class="c2">135.05</td><td class="c2">7.5</td><td class="c2">1300</td><td class="c2">173.33</td><td class="c2">128.35%</td><td class="c2">128.35%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c3" rowspan="2">普洱</td><td class="c3" rowspan="2">535446769</td><td class="c3" rowspan="2">70.93%</td><td class="c2">普洱生茶</td><td class="c4">485077865</td><td class="c2">90.59%</td><td class="c4">10185620.16</td><td class="c4">485077865</td><td class="c2">47.62</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c7">&nbsp;</td><td class="c2">&nbsp;</td><td class="c3" rowspan="2">208.74%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">普洱熟茶</td><td class="c4">50368904</td><td class="c2">9.41%</td><td class="c4">587964</td><td class="c4">50368904</td><td class="c2">85.67</td><td class="c2">170</td><td class="c2">30400</td><td class="c2">178.82</td><td class="c2">208.74%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c3" rowspan="2">白茶</td><td class="c3" rowspan="2">1650600</td><td class="c3" rowspan="2">0.01%</td><td class="c2">白毫银针</td><td class="c4">1036800</td><td class="c2">62.81%</td><td class="c2">白毫银针</td><td class="c4">1036800</td><td class="c2">100.00%</td><td class="c4">2880</td><td class="c4">1036800</td><td class="c2">360.00</td><td class="c2">15</td><td class="c2">8890</td><td class="c2">592.67</td><td class="c2">164.63%</td><td class="c2">164.63%</td><td class="c3" rowspan="2">164.63%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">新工艺白茶</td><td class="c4">613800</td><td class="c2">37.19%</td><td class="c2">新工艺白茶</td><td class="c4">613800</td><td class="c2">100.00%</td><td class="c4">2790</td><td class="c4">613800</td><td class="c2">220.00</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td><td class="c2">&nbsp;</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">黄茶</td><td class="c4">1521900</td><td class="c2">0.01%</td><td class="c2">黄芽茶</td><td class="c4">1521900</td><td class="c2">100.00%</td><td class="c2">蒙顶黄芽</td><td class="c4">1521900</td><td class="c2">100.00%</td><td class="c4">2670</td><td class="c4">1521900</td><td class="c2">570.00</td><td class="c2">56</td><td class="c2">27690</td><td class="c2">494.46</td><td class="c2">86.75%</td><td class="c2">86.75%</td><td class="c2">86.75%</td>
+                </tr>
+                <tr class="r1">
+                <td class="c2">花茶</td><td class="c4">37053690</td><td class="c2">0.25%</td><td class="c2">茉莉花茶</td><td class="c4">37053690</td><td class="c2">100.00%</td><td class="c2">四川茉莉花茶</td><td class="c4">37053690</td><td class="c2">100.00%</td><td class="c4">213714</td><td class="c4">37053690</td><td class="c2">173.38</td><td class="c2">155</td><td class="c2">18515</td><td class="c2">119.45</td><td class="c2">68.90%</td><td class="c2">68.90%</td><td class="c2">68.90%</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="container">
+            <div class="row" id="footer">
+                <div class="col-md-12 col-lg-12 col-sm-12 padding0">
+                    <div class="panel panel-default index-tubiao">
+                        <div class="panel-body">
+                            &copy; 2019 - 浙江省菜篮子零售价格指数
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="old_ie" style="display: none;">
+            <div>
+            </div>
+        </div>
+    </div>
+        
+        <script src="content/js/jquery-1.11.0.min.js"></script>
+        <!-- Just for debugging purposes. Don't actually copy this line! -->
+        <!--[if lt IE 8]>
+            <script>
+            $('#old_ie div').html('<h3>您的IE浏览器版本过旧，不支持Html5 <br />请使用以下的浏览器或升级IE</h3>' +
+                '<span>谷歌浏览器：&nbsp;&nbsp;</span><a href="/content/browser/chrome.exe">点击下载</a><br/>' +
+                '<p></p>' +
+                '<span>火狐浏览器：&nbsp;&nbsp;</span><a href="/content/browser/firefox.exe">点击下载</a>');
+            $('#old_ie').show();
+            </script>
+        <![endif]-->
+        <script src="content/js/bootstrap.min.js"></script>
+        <script src="content/js/underscore-min.js"></script>
+        <script src="content/js/backbone-min.js"></script>
+
+        <script src="content/js/jquery-ui-1.10.4.dp.min.js"></script>
+        <script src="content/js/datepicker_zh.js"></script>
+
+        <script src="content/js/highstock.js"></script>
+        <script src="content/js/exporting.js"></script>
+        <script src="content/js/initchart.js"></script>
+        <script src="content/js/grid-light.js"></script>
+        <script src="content/js/setting.js"></script>
+        <script src="content/js/home.js"></script>
+
+        <script src="content/js/jquery.form.min.js"></script>
+
+    <script type="text/javascript"  th:inline="javascript">
+        $(document).ready(function () {
+
+            var indexdata=[{"totalindex":90.58,"unixTimestamp":1527782410000}];
+
+            function data(d){
+                var arr=new Array();
+                for(var i=0;i<d.length;i++){
+                    var arr1=new Array();
+                    arr1.push(d[i].unixTimestamp);
+                    arr1.push(d[i].totalindex);
+                    arr.push(arr1);
+                }
+                return arr;
+            };
+            indexdata=data(indexdata);
+            chartData(indexdata);
+        });
+    </script>
+
+    <!--script type="text/javascript">
+        $('#sub').click(function (e) {
+            var btn = $(e.currentTarget);
+            btn.button('loading');
+            $('#form').ajaxSubmit({
+                success: function (resp) {
+                    btn.button('reset');
+                    if (resp.success) {
+                        alert('导入成功');
+                    } else {
+                        alert('导入失败：' + resp.info);
+                    }
+                },
+                error: function (e) {
+                    btn.button('reset');
+                },
+                dataType: 'json',
+                data: {}
+            });
+        });
+    </script-->
+
+    </body>
+</html>

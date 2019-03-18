@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>类目管理 - 浙江省菜篮子零售价格指数</title>
+        <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="content/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="content/css/index.css" rel="stylesheet" />
+        <link href="content/css/smoothness/jquery-ui.min.css" rel="stylesheet" />
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><img src="resource/images/untitled.png" width="194" height="76"  style="margin-top: -5px;"/></a>
+                </div>
+                <div class="collapse navbar-collapse" id="nav">
+                    <ul class="nav navbar-nav">
+                        
+                        <li class="active"><a href="/category">类目权重</a></li>
+                        <li class=""><a href="/indexround" >期次列表</a></li>
+                           <li class="dropdown ">
+                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">数据采集 <b class="caret"></b></a>
+                               <ul class="dropdown-menu">
+                                   <li><a href="/caiji/index">填报记录</a></li>
+                                   <li class="divider"></li>
+                                   <li><a href="/caiji/excel">导入表格</a></li>
+                                   <li><a href="/caiji/hand">填写价格</a></li>
+                               </ul>
+                            </li>
+                                                <li class="dropdown ">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">指标查看 <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                <li><a href="/priceindex/detaillist">多维条件查询</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/priceindex/index">指标查询</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown ">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">指标计算 <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/computer/index/day">计算日指数</a></li>    
+                                <li><a href="/computer/index/week">计算周指数</a></li>
+                                <li><a href="/computer/index/month">计算月指数</a></li>
+                                <li><a href="/computer/index/season">计算季指数</a></li>
+                                <li><a href="/computer/index/year">计算年指数</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/tempcomputer">预计算指数</a></li>    
+                            </ul>
+                        </li>    
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a class="user" href="/account/manage" title="管理">310000</a>
+                        </li>
+                        <li>
+<form action="/account/logOff" class="" id="logoutForm" method="post"><input name="__RequestVerificationToken" type="hidden" value="6ROhzhYLyzhYa_22jknBOUKSX3Jn5jjYvlevJDl4nYbVawA3cEfsHvWD46SGHbJwVNdFXT-HW349-Vh_ponOQtMdrj8dUwzZku9awTjykFY1" />                                      <button type="submit" class="logoff">注销</button>
+</form>                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container" id="content">
+<input type="hidden" value="310000" id="postcode"/>
+
+<div class="row my-row">
+    <table class="table table-bordered">
+        <!--thead>
+            <tr>
+                <th class="col-md-3">大类</th>
+                <th class="col-md-3">中类</th>
+                <th class="col-md-3">小类</th>
+                <th class="col-md-3">规格品</th>
+            </tr>
+        </thead-->
+        <tbody>
+<tr class="r1">
+<td class="c1">一级类别</td><td class="c1">一级销售额</td><td class="c1">一级权重</td><td class="c1">二级类别</td><td class="c1">二级销售额</td><td class="c1">二级权重</td><td class="c2">三级类别</td><td class="c2">三级销售额</td><td class="c2">三级权重</td>
+</tr>
+<tr class="r1">
+<td class="c3" rowspan="29">绿茶</td><td class="c3" rowspan="29">13288345279</td><td class="c3" rowspan="29">88.52%</td><td class="c3" rowspan="26">名优绿茶</td><td class="c3" rowspan="26">11546655143</td><td class="c3" rowspan="26">86.89%</td><td class="c2">巴山雀舌</td><td class="c4">556800</td><td class="c2">0.00%</td>
+</tr>
+<tr class="r1">
+<td class="c2">邓村绿茶</td><td class="c4">1050000000</td><td class="c2">8.35%</td>
+</tr>
+<tr class="r1">
+<td class="c2">峨眉山茶</td><td class="c4">11527680</td><td class="c2">0.09%</td>
+</tr>
+<tr class="r1">
+<td class="c2">贵州针</td><td class="c4">72825000</td><td class="c2">0.58%</td>
+</tr>
+<tr class="r1">
+<td class="c2">汉中仙毫</td><td class="c4">75600000</td><td class="c2">0.60%</td>
+</tr>
+<tr class="r1">
+<td class="c2">黄山毛峰</td><td class="c4">360000000</td><td class="c2">2.86%</td>
+</tr>
+<tr class="r1">
+<td class="c2">金坛雀舌</td><td class="c4">58800000</td><td class="c2">0.47%</td>
+</tr>
+<tr class="r1">
+<td class="c2">卷曲形茶</td><td class="c4">547467900</td><td class="c2">4.35%</td>
+</tr>
+<tr class="r1">
+<td class="c2">六安瓜片</td><td class="c4">338000000</td><td class="c2">2.69%</td>
+</tr>
+<tr class="r1">
+<td class="c2">马边绿茶</td><td class="c4">2171400</td><td class="c2">0.02%</td>
+</tr>
+<tr class="r1">
+<td class="c2">茅山青锋</td><td class="c4">98560000</td><td class="c2">0.78%</td>
+</tr>
+<tr class="r1">
+<td class="c2">湄潭翠芽</td><td class="c4">111199000</td><td class="c2">0.88%</td>
+</tr>
+<tr class="r1">
+<td class="c2">湄潭毛峰</td><td class="c4">82620000</td><td class="c2">0.66%</td>
+</tr>
+<tr class="r1">
+<td class="c2">蒙顶甘露</td><td class="c4">7059000</td><td class="c2">0.06%</td>
+</tr>
+<tr class="r1">
+<td class="c2">蒙顶山茶</td><td class="c4">12888720</td><td class="c2">0.10%</td>
+</tr>
+<tr class="r1">
+<td class="c2">蒲江雀舌</td><td class="c4">1360590</td><td class="c2">0.01%</td>
+</tr>
+<tr class="r1">
+<td class="c2">钱塘龙井</td><td class="c4">142520000</td><td class="c2">1.13%</td>
+</tr>
+<tr class="r1">
+<td class="c2">四川扁形茶</td><td class="c4">2835835000</td><td class="c2">22.54%</td>
+</tr>
+<tr class="r1">
+<td class="c2">松阳扁茶</td><td class="c4">373153202</td><td class="c2">2.97%</td>
+</tr>
+<tr class="r1">
+<td class="c2">松阳香茶</td><td class="c4">156800000</td><td class="c2">1.25%</td>
+</tr>
+<tr class="r1">
+<td class="c2">条形茶</td><td class="c4">1730000000</td><td class="c2">13.75%</td>
+</tr>
+<tr class="r1">
+<td class="c2">五峰绿茶</td><td class="c4">1</td><td class="c2">0.00%</td>
+</tr>
+<tr class="r1">
+<td class="c2">信阳毛尖</td><td class="c4">1336400000</td><td class="c2">10.62%</td>
+</tr>
+<tr class="r1">
+<td class="c2">宜宾早茶</td><td class="c4">3608550</td><td class="c2">0.03%</td>
+</tr>
+<tr class="r1">
+<td class="c2">永川秀芽</td><td class="c4">23173200</td><td class="c2">0.18%</td>
+</tr>
+<tr class="r1">
+<td class="c2">越州龙井</td><td class="c4">3146929100</td><td class="c2">25.02%</td>
+</tr>
+<tr class="r1">
+<td class="c3" rowspan="3">大宗绿茶</td><td class="c3" rowspan="3">1741690136</td><td class="c3" rowspan="3">13.11%</td><td class="c2">炒青绿茶</td><td class="c4">1524712600</td><td class="c2">87.54%</td>
+</tr>
+<tr class="r1">
+<td class="c2">烘青绿茶</td><td class="c4">216683536</td><td class="c2">12.44%</td>
+</tr>
+<tr class="r1">
+<td class="c2">蒸青绿茶</td><td class="c4">294000</td><td class="c2">0.02%</td>
+</tr>
+<tr class="r1">
+<td class="c3" rowspan="7">红茶</td><td class="c3" rowspan="7">573439780</td><td class="c3" rowspan="7">3.82%</td><td class="c3" rowspan="5">工夫红茶</td><td class="c3" rowspan="5">496322380</td><td class="c3" rowspan="5">86.55%</td><td class="c2">川红工夫　</td><td class="c4">311359600</td><td class="c2">62.73%</td>
+</tr>
+<tr class="r1">
+<td class="c2">滇红工夫</td><td class="c4">45334280</td><td class="c2">9.13%</td>
+</tr>
+<tr class="r1">
+<td class="c2">宜红工夫</td><td class="c4">45000000</td><td class="c2">9.07%</td>
+</tr>
+<tr class="r1">
+<td class="c2">昭平红</td><td class="c4">37636000</td><td class="c2">7.58%</td>
+</tr>
+<tr class="r1">
+<td class="c2">遵义红</td><td class="c4">56992500</td><td class="c2">11.48%</td>
+</tr>
+<tr class="r1">
+<td class="c2">小种红茶</td><td class="c4">76500000</td><td class="c2">13.34%</td><td class="c2">松阳红茶</td><td class="c4">76500000</td><td class="c2">100.00%</td>
+</tr>
+<tr class="r1">
+<td class="c2">红碎茶</td><td class="c4">617400</td><td class="c2">0.11%</td><td class="c2">南川红碎茶</td><td class="c4">617400</td><td class="c2">100.00%</td>
+</tr>
+<tr class="r1">
+<td class="c5" rowspan="2">乌龙茶</td><td class="c5" rowspan="2">354607930</td><td class="c5" rowspan="2">2.36%</td><td class="c5" rowspan="2">闽南乌龙</td><td class="c5" rowspan="2">354607930</td><td class="c5" rowspan="2">100.00%</td><td class="c6">安溪铁观音</td><td class="c4">332416500</td><td class="c6">93.74%</td>
+</tr>
+<tr class="r1">
+<td class="c6">黄金桂</td><td class="c4">22191430</td><td class="c6">6.26%</td>
+</tr>
+<tr class="r1">
+<td class="c3" rowspan="7">黑茶</td><td class="c3" rowspan="7">754942119</td><td class="c3" rowspan="7">5.03%</td><td class="c3" rowspan="4">安化黑茶</td><td class="c3" rowspan="4">219200000</td><td class="c3" rowspan="4">29.04%</td><td class="c2">茯砖</td><td class="c4">102000000</td><td class="c2">46.53%</td>
+</tr>
+<tr class="r1">
+<td class="c2">黑砖</td><td class="c4">12800000</td><td class="c2">5.84%</td>
+</tr>
+<tr class="r1">
+<td class="c2">千两</td><td class="c4">70400000</td><td class="c2">32.12%</td>
+</tr>
+<tr class="r1">
+<td class="c2">三尖</td><td class="c4">34000000</td><td class="c2">15.51%</td>
+</tr>
+<tr class="r1">
+<td class="c2">四川黑茶</td><td class="c2">295350</td><td class="c2">0.04%</td><td class="c2">康砖</td><td class="c4">295350</td><td class="c2">100.00%</td>
+</tr>
+<tr class="r1">
+<td class="c3" rowspan="2">普洱</td><td class="c3" rowspan="2">535446769</td><td class="c3" rowspan="2">70.93%</td><td class="c2">普洱生茶</td><td class="c4">485077865</td><td class="c2">90.59%</td>
+</tr>
+<tr class="r1">
+<td class="c2">普洱熟茶</td><td class="c4">50368904</td><td class="c2">9.41%</td>
+</tr>
+<tr class="r1">
+<td class="c3" rowspan="2">白茶</td><td class="c3" rowspan="2">1650600</td><td class="c3" rowspan="2">0.01%</td><td class="c2">白毫银针</td><td class="c4">1036800</td><td class="c2">62.81%</td><td class="c2">白毫银针</td><td class="c4">1036800</td><td class="c2">100.00%</td>
+</tr>
+<tr class="r1">
+<td class="c2">新工艺白茶</td><td class="c4">613800</td><td class="c2">37.19%</td><td class="c2">新工艺白茶</td><td class="c4">613800</td><td class="c2">100.00%</td>
+</tr>
+<tr class="r1">
+<td class="c2">黄茶</td><td class="c4">1521900</td><td class="c2">0.01%</td><td class="c2">黄芽茶</td><td class="c4">1521900</td><td class="c2">100.00%</td><td class="c2">蒙顶黄芽</td><td class="c4">1521900</td><td class="c2">100.00%</td>
+</tr>
+<tr class="r1">
+<td class="c2">花茶</td><td class="c4">37053690</td><td class="c2">0.25%</td><td class="c2">茉莉花茶</td><td class="c4">37053690</td><td class="c2">100.00%</td><td class="c2">四川茉莉花茶</td><td class="c4">37053690</td><td class="c2">100.00%</td>
+</tr>
+
+</tbody>
+    </table>
+</div>
+
+<div class="modal fade"  id="add_class_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+        </div>
+    </div>
+</div>
+<div class="modal fade"  id="edit_weight_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+        </div>
+    </div>
+</div>
+
+</div>
+        <div class="container">
+            <div class="row" id="footer">
+                <div class="col-md-12 col-lg-12 col-sm-12 padding0">
+                    <div class="panel panel-default index-tubiao">
+                        <div class="panel-body">
+                            &copy; 2019 - 浙江省菜篮子零售价格指数
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="old_ie" style="display: none;">
+            <div>
+            </div>
+        </div>
+        
+
+    
+
+        <script src="content/js/jquery-1.11.0.min.js"></script>
+        <!-- Just for debugging purposes. Don't actually copy this line! -->
+        <!--[if lt IE 8]>
+            <script>
+            $('#old_ie div').html('<h3>您的IE浏览器版本过旧，不支持Html5 <br />请使用以下的浏览器或升级IE</h3>' +
+                '<span>谷歌浏览器：&nbsp;&nbsp;</span><a href="/content/browser/chrome.exe">点击下载</a><br/>' +
+                '<p></p>' +
+                '<span>火狐浏览器：&nbsp;&nbsp;</span><a href="/content/browser/firefox.exe">点击下载</a>');
+            $('#old_ie').show();
+            </script>
+        <![endif]-->
+        <script src="content/js/bootstrap.min.js"></script>
+        <script src="content/js/underscore-min.js"></script>
+        <script src="content/js/backbone-min.js"></script>
+
+        <script src="content/js/jquery-ui-1.10.4.dp.min.js"></script>
+        <script src="content/js/datepicker_zh.js"></script>
+
+        <script src="content/js/highstock.js"></script>
+        <script src="content/js/exporting.js"></script>
+        <script src="content/js/initchart.js"></script>
+
+        <script src="content/js/jquery.form.min.js"></script>
+
+        <!--script src="content/js/home.min.js?_=15311"></script>
+        
+    <script type="text/javascript">
+        $(function () {
+            var view = new CategoriesView();
+        })
+    </script-->
+
+    </body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>主页</title>
+        <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="content/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="content/css/index.css" rel="stylesheet" />
+        <link href="content/css/smoothness/jquery-ui.min.css" rel="stylesheet" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="/Content/js/html5shiv.js"></script>
+          <script src="/Content/js/respond.min.js"></script>
+        <![endif]-->
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div >
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><img src="resource/images/untitled.png" width="194" height="76"  style="margin-top: -5px;"/></a>
+                </div>
+                <div class="collapse navbar-collapse" id="nav">
+                    
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a class="user" href="/account/manage" title="管理">310000</a>
+                        </li>
+                        <li>
+<form action="/account/logOff" class="" id="logoutForm" method="post"><input name="__RequestVerificationToken" type="hidden" value="XErBrGCco7CQgioCElf09HnBnSbN3QWUPW3xD46-E5ulHkYjMXBUM15A-WN81wN60d9v5HZjRo0i7qXHmFyw0NjIdSf_SFULgzkKBsWe2fg1" />                                      <button type="submit" class="logoff">注销</button>
+</form>                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="" 	id="content">
+<div>
+    <div class="col-md-2 col-lg-2 col-sm-2 padding0">
+        <div class="userinfo">
+            <div class="userinfo_one">
+                <div class="userinfo_two"><img src="resource/images/logo.png" width="100%"/></div>
+            </div>
+            
+        </div>
+        <ul class="nav nav-pills nav-stacked nav-user" id="usernavs">
+            <li><a href="#">首页</a></li>
+			<li>
+				<a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse">数据采集<b class="caret"></b></a>
+				<ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+					<li style="margin:10px"><a href="tables.html" style="border-bottom:0;">填报纪录</a></li>
+					<li style="margin:10px"><a href="rank.html" style="border-bottom:0">导入表格</a></li>
+				</ul>
+			</li>
+			<li ><a href="/priceindex/index">数据管理</a></li>
+			<li>
+				<a href="/priceindex/detaillist">计算展示</a>
+				
+			</li>
+			<li class="active"><a href="/import/index/day">控制分析</a></li>
+            
+        </ul>
+    </div>
+    <div class="col-md-10 col-lg-10 col-sm-10">
+        <form action="/example/html5/demo_form.asp" method="get">
+		开始时间<input type="date" name="user_date">结束时间<input type="date" name="user_date"/>
+
+		<button type="button" class="btn btn-success">确定查询</button>
+</form>
+        <div id="chart" class="" style="height: 374px;margin-top: 10px;">    
+        </div>
+        <div class="panel panel-default index-tubiao index-sjtb">
+            <div class="panel-heading">
+                <div class="pull-left">涨跌幅排行榜</div><em class="pull-left" id="top_date"></em>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped" style="margin-bottom:0;">
+                    <thead>
+                        <tr>
+                            <th>类目</th><th>价格</th><th>涨跌值</th><th>涨跌幅</th>
+                            <th>类目</th><th>价格</th><th>涨跌值</th><th>涨跌幅</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tops">
+        
+        <tr style="font-size:14px;">
+            <td><span class="glyphicon glyphicon-arrow-up"></span>四季豆</td>
+            <td>11.31</td>
+            <td>1.52</td>
+            <td>15.47%</td>
+            <td><span class="glyphicon glyphicon-arrow-down"></span>海虾</td>
+            <td>38.50</td>
+            <td>-0.45</td>
+            <td>-1.16%</td>
+        </tr>
+        
+        <tr style="font-size:14px;">
+            <td><span class="glyphicon glyphicon-arrow-up"></span>茄子</td>
+            <td>10.40</td>
+            <td>1.36</td>
+            <td>15.04%</td>
+            <td><span class="glyphicon glyphicon-arrow-down"></span>茭白</td>
+            <td>7.92</td>
+            <td>-0.06</td>
+            <td>-0.75%</td>
+        </tr>
+        
+        <tr style="font-size:14px;">
+            <td><span class="glyphicon glyphicon-arrow-up"></span>黄豆芽</td>
+            <td>2.97</td>
+            <td>0.32</td>
+            <td>11.89%</td>
+            <td><span class="glyphicon glyphicon-arrow-down"></span>花蛤</td>
+            <td>8.02</td>
+            <td>-0.05</td>
+            <td>-0.62%</td>
+        </tr>
+        
+        <tr style="font-size:14px;">
+            <td><span class="glyphicon glyphicon-arrow-up"></span>绿豆芽</td>
+            <td>2.93</td>
+            <td>0.29</td>
+            <td>10.80%</td>
+            <td><span class="glyphicon glyphicon-arrow-down"></span>鸡蛋</td>
+            <td>5.74</td>
+            <td>-0.01</td>
+            <td>-0.17%</td>
+        </tr>
+        
+        <tr style="font-size:14px;">
+            <td><span class="glyphicon glyphicon-arrow-up"></span>青菜（油菜）</td>
+            <td>3.30</td>
+            <td>0.32</td>
+            <td>10.74%</td>
+            <td><span class="glyphicon glyphicon-arrow-down"></span>精瘦肉</td>
+            <td>17.33</td>
+            <td>-0.02</td>
+            <td>-0.12%</td>
+        </tr>
+          
+    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div class="row" id="description" style="display: none;">
+    <div class="panel panel-default index-tubiao">
+        <div class="panel-body">
+            <div class="pull-left" >采价规格品图文描述</div>
+            <div id="desc_cats"></div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3" id="des1">
+        
+    </div>
+    <div class="col-lg-3 col-md-3" id="des2">
+        
+    </div>
+    <div class="col-lg-3 col-md-3" id="des3">
+        
+    </div>
+    <div class="col-lg-3 col-md-3" id="des4">
+        
+    </div>
+</div>
+<div class="modal fade" id="nav_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">管理自定义菜单</h4>
+      </div>
+      <div class="modal-body">
+        <ul class="nav nav-pills nav-justified" role="tablist" id="my_navs_change">
+            <li class="active"><a href="#mynavs">我的自定义菜单</a></li>
+            <li><a href="#allnavs">添加自定义菜单</a></li>
+        </ul>
+          <div id="mynavs">
+              <table class="table">
+                  <thead>
+                      <tr><th>名称</th><th>删除</th></tr>
+                  </thead>
+                  <tbody>
+                      
+                  </tbody>
+              </table>
+          </div>
+          <div id="allnavs" style="display: none;" class="row">
+              <div class="col-sm-4">
+                      <div class="checkbox">
+                          <label>
+                              <input type="checkbox" value="/caiji/excel"> 导入报价
+                          </label>
+                      </div>
+                      <div class="checkbox">
+                          <label>
+                              <input type="checkbox" value="/caiji/hand"> 报价填报
+                          </label>
+                      </div>
+                      <div class="checkbox">
+                          <label>
+                              <input type="checkbox" value="/caiji/index"> 填报记录
+                          </label>
+                      </div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="checkbox">
+                      <label>
+                          <input type="checkbox" value="/priceindex/index"> 指标查询
+                      </label>
+                  </div>
+                  <div class="checkbox">
+                      <label>
+                          <input type="checkbox" value="/priceindex/detaillist"> 指标多维查询
+                      </label>
+                  </div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="checkbox">
+                      <label>
+                          <input type="checkbox" value="/computer/index/day"> 计算日指数
+                      </label>
+                  </div>
+                  <div class="checkbox">
+                      <label>
+                          <input type="checkbox" value="/computer/index/week"> 计算周指数
+                      </label>
+                  </div>
+                  <div class="checkbox">
+                      <label>
+                          <input type="checkbox" value="/computer/index/month"> 计算月指数
+                      </label>
+                  </div>
+                  <div class="checkbox">
+                      <label>
+                          <input type="checkbox" value="/computer/index/season"> 计算季指数
+                      </label>
+                  </div>
+              </div>
+          </div>
+          <div id="save_info"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="save_nav" data-loading-text="保存中">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+		<div id="footer">
+			<div class="col-md-12 col-lg-12 col-sm-12 padding0">
+				<div class="panel panel-default index-tubiao">
+					<div class="panel-body">
+						&copy; 2019 - 浙江省菜篮子零售价格指数
+					</div>
+				</div>
+			</div>
+		</div>
+        
+        
+        <script src="content/js/jquery-1.11.0.min.js"></script>
+        <!-- Just for debugging purposes. Don't actually copy this line! -->
+        <!--[if lt IE 8]>
+            <script>
+            $('#old_ie div').html('<h3>您的IE浏览器版本过旧，不支持Html5 <br />请使用以下的浏览器或升级IE</h3>' +
+                '<span>谷歌浏览器：&nbsp;&nbsp;</span><a href="/content/browser/chrome.exe">点击下载</a><br/>' +
+                '<p></p>' +
+                '<span>火狐浏览器：&nbsp;&nbsp;</span><a href="/content/browser/firefox.exe">点击下载</a>');
+            $('#old_ie').show();
+            </script>
+        <![endif]-->
+        <script src="content/js/bootstrap.min.js"></script>
+        <script src="content/js/underscore-min.js"></script>
+        <script src="content/js/backbone-min.js"></script>
+
+        <script src="content/js/jquery-ui-1.10.4.dp.min.js"></script>
+        <script src="content/js/datepicker_zh.js"></script>
+
+        <script src="content/js/highstock.js"></script>
+        <script src="content/js/exporting.js"></script>
+        <script src="content/js/initchart.js"></script>
+				<script src="content/js/grid-light.js"></script>
+		<script src="content/js/setting.js"></script>
+		<script src="content/js/home.js"></script>
+		
+		
+        <script src="content/js/jquery.form.min.js"></script>
+
+        <!--script src="content/js/home.min.js?_=15311"></script-->
+        
+    
+    
+    <script type="text/javascript"  th:inline="javascript">
+        $(document).ready(function () {
+            
+
+            var indexdata=[{"totalindex":90.58,"unixTimestamp":1527782410000}];
+
+            function data(d){
+                var arr=new Array();
+                for(var i=0;i<d.length;i++){
+                    var arr1=new Array();
+                    arr1.push(d[i].unixTimestamp);
+                    arr1.push(d[i].totalindex);
+                    arr.push(arr1);
+                }
+                return arr;
+            };
+            indexdata=data(indexdata);
+            chartData(indexdata);
+        });
+    </script>
+
+    </body>
+</html>

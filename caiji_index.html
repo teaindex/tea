@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>采集历史记录 - 浙江省菜篮子零售价格指数</title>
+        <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="content/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="content/css/index.css" rel="stylesheet" />
+        <link href="content/css/smoothness/jquery-ui.min.css" rel="stylesheet" />
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="content/js/html5shiv.js"></script>
+          <script src="content/js/respond.min.js"></script>
+        <![endif]-->
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/"><img src="resource/images/untitled.png" width="194" height="76"  style="margin-top: -5px;"/></a>
+                </div>
+                <div class="collapse navbar-collapse" id="nav">
+                    <ul class="nav navbar-nav">
+                        
+                        <li class=""><a href="/category">类目权重</a></li>
+                        <li class=""><a href="/indexround" >期次列表</a></li>
+                           <li class="dropdown active">
+                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">数据采集 <b class="caret"></b></a>
+                               <ul class="dropdown-menu">
+                                   <li><a href="/caiji/index">填报记录</a></li>
+                                   <li class="divider"></li>
+                                   <li><a href="/caiji/excel">导入表格</a></li>
+                                   <li><a href="/caiji/hand">填写价格</a></li>
+                               </ul>
+                            </li>
+                                                <li class="dropdown ">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">指标查看 <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                <li><a href="/priceindex/detaillist">多维条件查询</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/priceindex/index">指标查询</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown ">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">指标计算 <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/computer/index/day">计算日指数</a></li>    
+                                <li><a href="/computer/index/week">计算周指数</a></li>
+                                <li><a href="/computer/index/month">计算月指数</a></li>
+                                <li><a href="/computer/index/season">计算季指数</a></li>
+                                <li><a href="/computer/index/year">计算年指数</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/tempcomputer">预计算指数</a></li>    
+                            </ul>
+                        </li>    
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a class="user" href="/account/manage" title="管理">310000</a>
+                        </li>
+                        <li>
+<form action="/account/logOff" class="" id="logoutForm" method="post"><input name="__RequestVerificationToken" type="hidden" value="F5W4N3rtgTJPFEQ24VT1YlG84UuX8chEkgjegHw-066jt94VthYlvntjhlm3D8YVNh-PDCTOY_ALn5mOVELdq2XjBE8NmAfRN7kite8_Uco1" />                                      <button type="submit" class="logoff">注销</button>
+</form>                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container" id="content">
+        <table class="table row my-row">
+            <thead>
+                <tr>
+                    <th>价格日期</th><th>导入时间</th><th>查看</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>2019-02-15</td><td>02-15 14:27</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-15&amp;excel=1">原数据</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-15&amp;excel=1">计算后数据</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-02-14</td><td>02-15 14:27</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-14">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-14&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-02-13</td><td>02-13 10:12</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-13">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-13&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-02-12</td><td>02-12 10:27</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-12">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-12&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-02-11</td><td>02-11 15:26</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-11">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-11&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-02-08</td><td>02-11 15:26</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-08">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-08&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-02-07</td><td>02-12 10:26</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-07">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-07&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-02-06</td><td>02-14 15:12</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-06">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-06&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-02-05</td><td>02-12 16:11</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-05">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-05&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-02-04</td><td>02-11 14:51</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-04">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-04&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-02-03</td><td>02-11 14:51</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-03">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-03&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-02-02</td><td>02-11 14:50</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-02">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-02&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-02-01</td><td>02-01 15:33</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-01">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-02-01&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-31</td><td>02-01 08:48</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-31">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-31&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-30</td><td>01-30 10:03</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-30">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-30&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-29</td><td>01-29 12:33</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-29">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-29&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-28</td><td>01-29 12:33</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-28">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-28&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-24</td><td>01-24 12:46</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-24">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-24&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-23</td><td>01-24 13:01</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-23">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-23&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-22</td><td>01-24 12:46</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-22">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-22&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-21</td><td>01-22 11:31</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-21">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-21&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-18</td><td>01-21 16:01</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-18">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-18&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-17</td><td>01-21 16:00</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-17">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-17&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-16</td><td>01-21 15:30</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-16">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-16&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-15</td><td>01-15 15:44</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-15">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-15&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-14</td><td>01-15 09:44</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-14">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-14&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-11</td><td>01-15 09:44</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-11">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-11&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-10</td><td>01-11 09:44</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-10">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-10&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-09</td><td>01-09 14:44</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-09">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-09&amp;excel=1">导出</a></td>
+                    </tr>    
+                    <tr>
+                        <td>2019-01-08</td><td>01-09 14:29</td><td><a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-08">查看</a>&nbsp;&nbsp;<a target="_blank" href="/caiji/detail?postcode=310000&amp;dt=2019-01-08&amp;excel=1">导出</a></td>
+                    </tr>    
+            </tbody>
+        </table>
+        <ul class="pager">
+            <li class="disabled"><a href="#">上一页</a></li>
+            <li class=""><a href="/caiji/index?city=310000&amp;pageindex=2">下一页</a></li>
+        </ul>
+</div>
+        <div class="container">
+            <div class="row" id="footer">
+                <div class="col-md-12 col-lg-12 col-sm-12 padding0">
+                    <div class="panel panel-default index-tubiao">
+                        <div class="panel-body">
+                            &copy; 2019 - 浙江省菜篮子零售价格指数
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="old_ie" style="display: none;">
+            <div>
+            </div>
+        </div>
+        
+        <script src="content/js/jquery-1.11.0.min.js"></script>
+        <!-- Just for debugging purposes. Don't actually copy this line! -->
+        <!--[if lt IE 8]>
+            <script>
+            $('#old_ie div').html('<h3>您的IE浏览器版本过旧，不支持Html5 <br />请使用以下的浏览器或升级IE</h3>' +
+                '<span>谷歌浏览器：&nbsp;&nbsp;</span><a href="/content/browser/chrome.exe">点击下载</a><br/>' +
+                '<p></p>' +
+                '<span>火狐浏览器：&nbsp;&nbsp;</span><a href="/content/browser/firefox.exe">点击下载</a>');
+            $('#old_ie').show();
+            </script>
+        <![endif]-->
+        <script src="content/js/bootstrap.min.js"></script>
+        <script src="content/js/underscore-min.js"></script>
+        <script src="content/js/backbone-min.js"></script>
+
+        <script src="content/js/jquery-ui-1.10.4.dp.min.js"></script>
+        <script src="content/js/datepicker_zh.js"></script>
+
+        <script src="content/js/highstock.js"></script>
+        <script src="content/js/exporting.js"></script>
+        <script src="content/js/initchart.js"></script>
+
+        <script src="content/js/jquery.form.min.js"></script>
+
+        <script src="content/js/home.min.js?_=15311"></script>
+        
+    <script type="text/javascript">
+        $(function() {
+            $('#price_date').datepicker();
+            $('#view_record').click(function() {
+                if (!$('#price_date').val() || !isNaN(Date.parse($('#price_date').val()))) {
+                    var hr = "/caiji/index?city=0&pricedate=" + $('#price_date').val();
+                    window.location.href = hr;
+                }
+            });
+        });
+    </script>
+
+    </body>
+</html>
