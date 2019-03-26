@@ -1,0 +1,70 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>茶指数 demo </title>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<!--script src="highcharts.src.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts.src.js"></script-->
+	<script src="https://cdn.highcharts.com.cn/highstock/highstock.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="content/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="chart" class="col-md-8 col-lg-8 col-sm-8 col-md-offset-2" 
+			style="font-size: 160%; z-index: 100;">
+		<div class="row">
+			<div class="col-md-2 col-lg-2 col-sm-2">
+				<div class="row" style="height: 80px;"></div>
+				<div class="row" style="height: 80px;">
+					<div class="btn-group">
+						<button type="button" class="btn btn-default" id="slc1">
+							定基
+						</button>
+						<button type="button" class="btn btn-default dropdown-toggle" 
+								data-toggle="dropdown" style="height: 34px;">
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a id="slc10">定基</a></li>
+							<li><a id="slc11">同比</a></li>
+							<li><a id="slc12">环比</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="row" style="height: 80px;">
+					<div class="btn-group">
+						<button type="button" class="btn btn-default" id="slc2">
+							日指数
+						</button>
+						<button type="button" class="btn btn-default dropdown-toggle" 
+								data-toggle="dropdown" style="height: 34px;">
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a id="slc20">日指数</a></li>
+							<li><a id="slc21">周指数</a></li>
+							<li><a id="slc22">月指数</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="row" style="height: 80px;">
+					<button type="button" id="display" class="btn btn-default">全部显示</button>
+				</div>
+			</div>
+			<div class="col-md-10 col-lg-10 col-sm-10">
+				<div id="container"></div>
+			</div>
+			<div class="col-md-10 col-lg-10 col-sm-10">
+				<div id="container00"></div>
+			</div>
+		</div>
+	</div>
+		<!--button type="button" id="confirm" class="btn btn-default"
+			style="position: absolute; top: 90px; left: 1140px; z-index: 1;">
+			返回
+		</button-->
+	<!--script language="JavaScript" src="chart.js"></script-->
+	<script language="JavaScript" src="chart00.js"></script>
+</body>
+</html>

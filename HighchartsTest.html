@@ -1,0 +1,194 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>茶指数 demo </title>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<link href="content/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="chart" class="col-md-8 col-lg-8 col-sm-8 col-md-offset-2" style="font-size: 160%;">
+		<div class="row" style="padding: 20px 0px 0px 0px;">
+			<div class="col-md-2 col-lg-2 col-sm-2" 
+				style="font-size: 85%; border: 1px solid black; 
+					height: 60px; text-align: center;">周期 \ <br />计算方法</div>
+			<div class="col-md-4 col-lg-4 col-sm-4" 
+				style="font-size: 85%; border: 1px solid black; 
+					height: 60px; text-align: center;">定基： 
+				<input type="date" name="start" class="btn" value="2018-06-18"
+					style="width: 100px; border: 1px solid black; margin: 4px 2px;"> -- 
+				<input type="date" name="end" class="btn" value="2018-06-20"
+					style="width: 100px; border: 1px solid black; margin: 4px 2px;">
+			</div>
+			<div class="col-md-3 col-lg-3 col-sm-3" 
+				style="font-size: 85%; border: 1px solid black; 
+					height: 60px; text-align: center;">同比</div>
+			<div class="col-md-3 col-lg-3 col-sm-3" 
+				style="font-size: 85%; border: 1px solid black; 
+					height: 60px; text-align: center;">环比</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2 col-lg-2 col-sm-2">
+				<div class="row" 
+					style="padding: 50px 4px; border: 1px solid black;">日指数</div>
+				<div class="row" 
+					style="padding: 50px 4px; border: 1px solid black;">周指数</div>
+				<div class="row" 
+					style="padding: 50px 4px; border: 1px solid black;">月指数</div>
+			</div>
+			<div class="col-md-10 col-lg-10 col-sm-10" style="padding: 0px;">
+				<div id="container" class="col-md-12 col-lg-12 col-sm-12" 
+					style="margin: 0 auto; border: 1px solid black;">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2 col-lg-2 col-sm-2 col-md-offset-6">
+				<button type="button" id="confirm">confirm</button>
+			</div>
+		</div>
+	</div>
+	<script language="JavaScript">
+		$(document).ready(function() {
+			var title = {
+				text: "茶指数"
+			};
+			var subtitle = {
+				text: "三级指数"
+			};
+
+			var xAxis = {
+				categories: ['6.18', '6.19', '6.20']
+			};
+			var yAxis = {
+				title: {
+					text: "指数"
+				}, 
+				plotLines: [{
+					value: 0,
+					width: 1,
+					color: '#808080'
+				}]
+			};
+
+			var tooltip = {
+				valueSuffix: '%'
+			};
+
+			var legend = {
+				layout: 'vertical', 
+				align: 'right', 
+				verticalAlign: 'middle', 
+				borderWidth: 0
+			};
+
+			var series = [
+						{
+							name: '贵州针', 
+							data: [73.41, 78.92, 77.47]
+						}, 
+						{
+							name: '卷曲形茶',
+							data: [114.29, 121.14, 107.66]
+						}, 
+						{
+							name: '湄潭翠芽',
+							data: [36.73, 29.52, 37.69]
+						}, 
+						{
+							name: '湄潭毛峰',
+							data: [52.47, 49.38, 53.04]
+						}, 
+						{
+							name: '四川扁形茶',
+							data: [83.27, 82.30, 86.04]
+						}, 
+						{
+							name: '条形茶',
+							data: [125.99, 125.58, 125.03]
+						}, 
+						{
+							name: '永川秀芽',
+							data: [86.29, 95.34, 82.59]
+						}, 
+						{
+							name: 'TEST',
+							data: [86.29, 82.59, ]
+						},
+						{
+							name: '越州龙井',
+							data: [49.48, 49.16, 48.38]
+						}, 
+						{
+							name: '炒青绿茶',
+							data: [57.50, 56.31, 54.26]
+						}, 
+						{
+							name: '川红工夫',
+							data: [98.66, 107.47, 116.04]
+						}, 
+						{
+							name: '遵义红',
+							data: [128.23, 128.23, 128.23]
+						}, 
+						{
+							name: '茯砖',
+							data: [98.03, 96.43, 111.41]
+						}, 
+						{
+							name: '黑砖',
+							data: [107.25, 97.08, 101.95]
+						}, 
+						{
+							name: '千两',
+							data: [123.38, 131.23, 150.69]
+						}, 
+						{
+							name: '三尖',
+							data: [191.18, 175.41, 195.72]
+						}, 
+						{
+							name: '康砖',
+							data: [127.73, 130.32, 129.80]
+						}, 
+						{
+							name: '普洱生茶',
+							data: [1270.14, 343.60, 1119.89]
+						}, 
+						{
+							name: '普洱熟茶',
+							data: [254.47, 99.22, 70.04]
+						}, 
+						{
+							name: '蒙顶黄芽',
+							data: [78.90, 82.73, 93.44]
+						}, 
+						{
+							name: '四川茉莉花茶',
+							data: [74.67, 75.70, 64.96]
+						} 
+					];
+
+			var json = {};
+
+			json.title = title;
+			json.subtitle = subtitle;
+			json.xAxis = xAxis;
+			json.yAxis = yAxis;
+			json.tooltip = tooltip;
+			json.legend = legend;
+
+			$('#container').highcharts(json);
+
+			json.series = series;
+			
+			//$('#container').highcharts(json);
+			$('#confirm').click(function(){
+				// AJAX
+				$('#container').highcharts(json);
+			});
+		});
+
+	</script>
+</body>
+</html>
