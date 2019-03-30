@@ -1,12 +1,13 @@
 <html>
 <head>
-	<meta charset="utf-8">
+	<meta charset="utf-8" http-equiv="Access-Control-Allow-Origin" content="*">
 	<title>茶指数 demo </title>
 	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 	<!--script src="highcharts.src.js"></script>
 	<script src="http://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/highcharts.src.js"></script-->
 	<script src="https://cdn.highcharts.com.cn/highstock/highstock.js"></script>
+	<script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link href="content/css/bootstrap.min.css" rel="stylesheet" />
 </head>
@@ -51,6 +52,9 @@
 				<div class="row" style="height: 80px;">
 					<button type="button" id="display" class="btn btn-default">全部显示</button>
 				</div>
+				<div class="row" style="height: 80px;">
+					<button type="button" id="confirm" class="btn btn-default">返回</button>
+				</div>
 			</div>
 			<div class="col-md-10 col-lg-10 col-sm-10">
 				<div id="container"></div>
@@ -60,10 +64,6 @@
 			</div>
 		</div>
 	</div>
-		<!--button type="button" id="confirm" class="btn btn-default"
-			style="position: absolute; top: 90px; left: 1140px; z-index: 1;">
-			返回
-		</button-->
 	<!--script language="JavaScript" src="chart.js"></script-->
 	<script language="JavaScript" src="chart00.js"></script>
 </body>
