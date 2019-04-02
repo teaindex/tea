@@ -94,7 +94,7 @@ var jsondata = {
 
 var label1 = "DingJi";
 var label2 = "DayIndex";
-var genre = "AllIndex";		// 类型
+var genre = "AllIndex";		// 级别
 
 
 var dataset = [];
@@ -104,21 +104,22 @@ var stock = [];
 var allNames = [];
 var dataLine = [];
 var dataColumn = [];
+var dataEvent = [];
 
 for (var i=0;i<jsondata["AllIndex"].length;i++) {
 	var flag = -1;
 	if (allNames.length!=0)
 		for (var a=0;a<allNames.length;a++)
-			if (allNames[a]=="总指数")
+			if (allNames[a]=="总计")
 				flag = a;
 	if (flag==-1) {
-		allNames.push("总指数");
+		allNames.push("总计");
 		dataLine.push([]);
 		dataColumn.push([]);
 		flag = allNames.length-1;
 	}
-		dataLine[flag].push([jsondata[genre][i]["unixtimestamp"],jsondata[genre][i]["totalindex"]]);
-		dataColumn[flag].push([jsondata[genre][i]["unixtimestamp"],jsondata[genre][i]["sale"]]);
+	dataLine[flag].push([jsondata[genre][i]["unixtimestamp"],jsondata[genre][i]["totalindex"]]);
+	dataColumn[flag].push([jsondata[genre][i]["unixtimestamp"],jsondata[genre][i]["sale"]]);
 }
 
 for (var i=0;i<allNames.length;i++) {
@@ -127,10 +128,16 @@ for (var i=0;i<allNames.length;i++) {
 		type: 'line',
 		name: allNames[i],
 		data: dataLine[i],
+		tooltip: {
+			valuePrefix: "类指数：",
+			valueSuffix: "%",
+			xDateFormat: '%Y年%B%e日'
+		},
 		events: {
 			click: function() {
 				genre = "OneIndex";
-				redraw();
+				parent = this.getName();//console.log(this.getName());
+				redraw_chart();
 			}
 		}
 	}, {
@@ -139,28 +146,36 @@ for (var i=0;i<allNames.length;i++) {
 		yAxis: 1,
 		name: allNames[i],
 		data: dataColumn[i],
+		tooltip: {
+			valuePrefix: "销售额：",
+			valueSuffix: "万元",
+			xDateFormat: '%Y年%B%e日'
+		},
 		events: {
 			click: function() {
 				genre = "OneIndex";
-				redraw();
+				parent = this.getName();//console.log(this.getName());
+				redraw_chart();
 			}
 		}
 	});
 }
 
 
-console.log(stock);
+//console.log(stock);
 
 Highcharts.setOptions({
 	lang: {
 		months: ['1月', '2月', '3月', '4月', '5月', '6月',  '7月', '8月', '9月', '10月', '11月', '12月'],
-		weekdays: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+		weekdays: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+		rangeSelectorZoom: ''
 	}
 });
 
 Highcharts.stockChart('container00', {
 		rangeSelector : {
-				selected : 2
+				selected : 2,
+				inputDateFormat: '%Y-%m-%d'
 		},
 		title : {
 				text : '茶指数'
@@ -194,15 +209,14 @@ Highcharts.stockChart('container00', {
 				align: "right", 
 				x: -3
 			}, 
-			height: '65%', 
-			plotLines: [{
-				value: 0,
-				width: 1,
-				color: '#808080'
-			}],
+			height: '65%',
+			resize: {
+				enabled: true
+			},
+			lineWidth: 2
 		}, {
 			title: {
-				text: "销售额"
+				text: "销售额："
 			}, 
 			labels: {
 				align: "right", 
@@ -210,6 +224,8 @@ Highcharts.stockChart('container00', {
 			}, 
 			top: '65%', 
 			height: '35%', 
+			offset: 0,
+			lineWidth: 2
 		}], 
 		legend: {
 			enabled: true, 
@@ -230,10 +246,11 @@ Highcharts.stockChart('container00', {
 				}
 			}
 		},
-		tooltip : {
+		/*tooltip : {
 			valueSuffix: '%', 
-			split: false
-		},
+			split: false,
+			//shared: true
+		},*/
 		plotOptions : {
 			line: {
 				connectNulls: true, 
@@ -248,28 +265,27 @@ Highcharts.stockChart('container00', {
 		series : stock
 });
 
-function redraw() {
+
+var parent = "AllIndex";
+
+function redraw_chart() {
+	//console.log(parent);
 	stock = [];
 
 
 	allNames = [];
 	dataLine = [];
 	dataColumn = [];
+	dataEvent = [];
 
-	var stage = "";
-	if (genre=="AllIndex" || genre=="OneIndex")
-		stage = genre;
-	else if (genre=="名优绿茶"||genre=="大宗绿茶"||genre=="工夫红茶"||genre=="小种红茶"||genre=="红碎茶"
-		||genre=="闽南乌龙"||genre=="安化黑茶"||genre=="四川黑茶"||genre=="普洱"||genre=="白毫银针"
-		||genre=="新工艺白茶"||genre=="黄芽茶"||genre=="茉莉花茶")
-		stage = "ThreeIndex";
-	else
-		stage = "TwoIndex";
-	console.log(genre);
-	for (var i=0;i<jsondata[stage].length;i++) {
-		var thisName = genre=="AllIndex" ? "总指数" : jsondata[stage][i]["name"];
-		if (genre!="AllIndex" && genre!="OneIndex")
-			if (genre!=jsondata[stage][i]["belongtoname"])
+	/*jsondata[genre] = _.sortBy(jsondata[genre], function(d) {
+        return d[0];
+    });*/
+
+	for (var i=0;i<jsondata[genre].length;i++) {
+		var thisName = genre=="AllIndex" ? "总计" : jsondata[genre][i]["name"];
+		if (genre!="AllIndex" && genre!="OneIndex" && parent!="")
+			if (parent!=jsondata[genre][i]["belongtoname"])
 				continue;
 		var flag = -1;
 		if (allNames.length!=0)
@@ -280,38 +296,51 @@ function redraw() {
 			allNames.push(thisName);
 			dataLine.push([]);
 			dataColumn.push([]);
+			dataEvent.push([]);
 			flag = allNames.length-1;
 		}
-			dataLine[flag].push([jsondata[stage][i]["unixtimestamp"],jsondata[stage][i]["totalindex"]]);
-			dataColumn[flag].push([jsondata[stage][i]["unixtimestamp"],jsondata[stage][i]["sale"]]);
+		//console.log(flag);
+		dataLine[flag].push([jsondata[genre][i]["unixtimestamp"],jsondata[genre][i]["totalindex"]]);
+		dataColumn[flag].push([jsondata[genre][i]["unixtimestamp"],jsondata[genre][i]["sale"]]);
 	}
 
-	console.log(stock);
+	//console.log(stock);
 
 	for (var i=0;i<allNames.length;i++) {
-		var na = allNames[i];
 		if (genre=="AllIndex") {
 			stock.push({
 			// 解析折线图数据
 				type: 'line',
-				name: na,
+				name: allNames[i],
 				data: dataLine[i],
+				tooltip: {
+					valuePrefix: "类指数：",
+					valueSuffix: "%",
+					xDateFormat: '%Y年%B%e日'
+				},
 				events: {
 					click: function() {
 						genre = "OneIndex";
-						redraw();
+						parent = this.getName();//console.log(this.getName());
+						redraw_chart();
 					}
 				}
 			}, {
 			// 解析柱状图数据
 				type: 'column',
 				yAxis: 1,
-				name: na,
+				name: allNames[i],
 				data: dataColumn[i],
+				tooltip: {
+					valuePrefix: "销售额：",
+					valueSuffix: "万元",
+					xDateFormat: '%Y年%B%e日'
+				},
 				events: {
 					click: function() {
 						genre = "OneIndex";
-						redraw();
+						parent = this.getName();//console.log(this.getName());
+						redraw_chart();
 					}
 				}
 			});
@@ -320,50 +349,74 @@ function redraw() {
 			stock.push({
 			// 解析折线图数据
 				type: 'line',
-				name: na,
+				name: allNames[i],
 				data: dataLine[i],
+				tooltip: {
+					valuePrefix: "类指数：",
+					valueSuffix: "%",
+					xDateFormat: '%Y年%B%e日'
+				},
 				events: {
 					click: function() {
-						genre = na;
-						redraw();
+						genre = "TwoIndex";
+						parent = this.getName();//console.log(this.getName());
+						redraw_chart();
 					}
 				}
 			}, {
 			// 解析柱状图数据
 				type: 'column',
 				yAxis: 1,
-				name: na,
+				name: allNames[i],
 				data: dataColumn[i],
+				tooltip: {
+					valuePrefix: "销售额：",
+					valueSuffix: "万元",
+					xDateFormat: '%Y年%B%e日'
+				},
 				events: {
 					click: function() {
-						genre = na;
-						redraw();
+						genre = "TwoIndex";
+						parent = this.getName();//console.log(this.getName());
+						redraw_chart();
 					}
 				}
 			});
 		}
-		else if (genre==allNames[i]) {
+		else if (genre=="TwoIndex") {
 			stock.push({
 			// 解析折线图数据
 				type: 'line',
-				name: na,
+				name: allNames[i],
 				data: dataLine[i],
+				tooltip: {
+					valuePrefix: "类指数：",
+					valueSuffix: "%",
+					xDateFormat: '%Y年%B%e日'
+				},
 				events: {
 					click: function() {
-						genre = na;
-						redraw();
+						genre = "ThreeIndex";
+						parent = this.getName();//console.log(this.getName());
+						redraw_chart();
 					}
 				}
 			}, {
 			// 解析柱状图数据
 				type: 'column',
 				yAxis: 1,
-				name: na,
+				name: allNames[i],
 				data: dataColumn[i],
+				tooltip: {
+					valuePrefix: "销售额：",
+					valueSuffix: "万元",
+					xDateFormat: '%Y年%B%e日'
+				},
 				events: {
 					click: function() {
-						genre = na;
-						redraw();
+						genre = "ThreeIndex";
+						parent = this.getName();//console.log(this.getName());
+						redraw_chart();
 					}
 				}
 			});
@@ -372,24 +425,36 @@ function redraw() {
 			stock.push({
 			// 解析折线图数据
 				type: 'line',
-				name: na,
+				name: allNames[i],
 				data: dataLine[i],
+				tooltip: {
+					valuePrefix: "类指数：",
+					valueSuffix: "%",
+					xDateFormat: '%Y年%B%e日'
+				},
 				events: {
 					click: function() {
 						genre = "AllIndex";
-						redraw();
+						parent = this.getName();//console.log(this.getName());
+						redraw_chart();
 					}
 				}
 			}, {
 			// 解析柱状图数据
 				type: 'column',
 				yAxis: 1,
-				name: na,
+				name: allNames[i],
 				data: dataColumn[i],
+				tooltip: {
+					valuePrefix: "销售额：",
+					valueSuffix: "万元",
+					xDateFormat: '%Y年%B%e日'
+				},
 				events: {
 					click: function() {
 						genre = "AllIndex";
-						redraw();
+						parent = this.getName();//console.log(this.getName());
+						redraw_chart();
 					}
 				}
 			});
@@ -398,55 +463,55 @@ function redraw() {
 
 	Highcharts.stockChart('container00', {
 			rangeSelector : {
-					selected : 2
+					selected : 2,
+					inputDateFormat: '%Y-%m-%d'
 			},
 			title : {
 					text : '茶指数'
 			},
 			chart : {
 				height : '60%', 
-				spacingBottom: 15
+				spacingBottom: 15,
+				backgroundColor: {
+					linearGradient: [0, 0, 500, 500],
+						stops: [
+							[0, 'rgb(255, 255, 255)'],
+							[1, 'rgb(240, 240, 255)']
+						]
+				}
 			}, 
 			yAxis : [{
+				x: -3,
 				title: {
 					text: "指数"
 				}, 
-				height: '65%', 
-				plotLines: [{
-					value: 0,
-					width: 1,
-					color: '#808080'
-				}]
+				labels: {
+					align: "right", 
+					x: -3
+				}, 
+				height: '65%',
+				resize: {
+					enabled: true
+				},
+				lineWidth: 2
 			}, {
 				title: {
-					text: "销售额"
+					text: "销售额："
+				}, 
+				labels: {
+					align: "right", 
+					x: -3
 				}, 
 				top: '65%', 
-				height: '35%'
-			}],
-			legend: {
-				enabled: true, 
-				layout: 'horizontal', 
-				floating: false, 
-				itemHoverStyle: {'color': 'blue'}, 
-				itemWidth: 120, 
-				width: 820,
-				navigation: {
-					activeColor: '#3E576F',
-					animation: true,
-					arrowSize: 10,
-					inactiveColor: '#CCC',
-					style: {
-						fontWeight: 'bold',
-						color: '#333',
-						fontSize: '12px'
-					}
-				}
-			},
-			tooltip : {
+				height: '35%', 
+				offset: 0,
+				lineWidth: 2
+			}], 
+			/*tooltip : {
 				valueSuffix: '%', 
-				split: false
-			},
+				split: false,
+				//shared: true
+			},*/
 			plotOptions : {
 				line: {
 					connectNulls: true, 
@@ -464,29 +529,20 @@ function redraw() {
 
 
 $('#confirm').click(function(){
-	// AJAX
-
-	//stock = stock==seriesGreen ? seriesFirst : seriesGreen;
-	if (dataset==seriesFirst) {
-		return;
-	} else if (dataset==seriesGreenFame || dataset==seriesGreenCommon) {
-		dataset = seriesGreen;
-	} else if (dataset==seriesRed1 || dataset==seriesRed2 || dataset==seriesRed3) {
-		dataset = seriesRed;
-	} else if (dataset==seriesOolong1) {
-		dataset = seriesOolong;
-	} else if (dataset==seriesBlack1 || dataset==seriesBlack2 || dataset==seriesBlack3) {
-		dataset = seriesBlack;
-	} else if (dataset==seriesWhite1 || dataset==seriesWhite2) {
-		dataset = seriesWhite;
-	} else if (dataset==seriesYellow1) {
-		dataset = seriesYellow;
-	} else if (dataset==seriesFlower1) {
-		dataset = seriesFlower;
-	} else {
-		dataset = seriesFirst;
+	switch (genre) {
+		case "AllIndex":
+			return;
+		case "OneIndex":
+			genre = "AllIndex";
+			break;
+		case "TwoIndex":
+			genre = "OneIndex";
+			break;
+		default:
+			genre = "TwoIndex";
 	}
-	redraw();
+	parent = "";
+	redraw_chart();
 });
 
 
@@ -498,7 +554,7 @@ $('#display').click(function(){
 		async: true,
 		data : [label1,label2],
 		success: function(data){
-		    var object = $.parseJSON(data[genre]);
+		    jsondata = $.parseJSON(data);
 		    alert(object);
 		},
 		error: function(msg){
