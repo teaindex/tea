@@ -213,7 +213,8 @@ Highcharts.stockChart('container00', {
 			resize: {
 				enabled: true
 			},
-			lineWidth: 2
+			lineWidth: 2,
+			type: 'logarithmic'
 		}, {
 			title: {
 				text: "销售额："
@@ -505,7 +506,8 @@ function redraw_chart() {
 				top: '65%', 
 				height: '35%', 
 				offset: 0,
-				lineWidth: 2
+				lineWidth: 2,
+				type: 'logarithmic'
 			}], 
 			/*tooltip : {
 				valueSuffix: '%', 
