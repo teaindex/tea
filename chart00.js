@@ -60,10 +60,10 @@ var jsondata = {
 		{"totalindex":136.25,"sale":920.0,"unixtimestamp":1527782400000,"name":"康砖","belongtoname":"四川黑茶"},
 		{"totalindex":208.74,"sale":30400.0,"unixtimestamp":1527868800000,"name":"普洱熟茶","belongtoname":"普洱"},
 		{"totalindex":346.47,"sale":19800.0,"unixtimestamp":1527782400000,"name":"普洱生茶","belongtoname":"普洱"},
+		{"totalindex":164.03,"sale":11810.0,"unixtimestamp":1527782400000,"name":"白毫银针","belongtoname":"白毫银针"},
 		{"totalindex":164.63,"sale":8890.0,"unixtimestamp":1527868800000,"name":"白毫银针","belongtoname":"白毫银针"},
 		{"totalindex":166.02,"sale":19200.0,"unixtimestamp":1527782400000,"name":"普洱熟茶","belongtoname":"普洱"},
 		{"totalindex":86.75,"sale":27690.0,"unixtimestamp":1527868800000,"name":"蒙顶黄芽","belongtoname":"黄芽茶"},
-		{"totalindex":164.03,"sale":11810.0,"unixtimestamp":1527782400000,"name":"白毫银针","belongtoname":"白毫银针"},
 		{"totalindex":68.90,"sale":18515.0,"unixtimestamp":1527868800000,"name":"四川茉莉花茶","belongtoname":"茉莉花茶"},
 		{"totalindex":89.85,"sale":21510.0,"unixtimestamp":1527782400000,"name":"蒙顶黄芽","belongtoname":"黄芽茶"},
 		{"totalindex":69.49,"sale":18795.0,"unixtimestamp":1527782400000,"name":"四川茉莉花茶","belongtoname":"茉莉花茶"}
@@ -301,10 +301,27 @@ function redraw_chart() {
 			flag = allNames.length-1;
 		}
 		//console.log(flag);
+		if (genre=="TwoIndex") {
+			var total = 0;
+			for (var s=0;s<jsondata["ThreeIndex"].length;s++) {
+				if (thisName!=jsondata["ThreeIndex"][s]["belongtoname"] || 
+						jsondata["ThreeIndex"][s]["unixtimestamp"]!=jsondata["TwoIndex"][i]["unixtimestamp"])
+					continue;
+				//console.log(total);
+				//console.log(jsondata["ThreeIndex"][s]["sale"]);
+				total += jsondata["ThreeIndex"][s]["sale"];
+				//console.log(total);
+			}
+			jsondata["TwoIndex"][i]["sale"] = total;
+			//console.log(jsondata["ThreeIndex"][s]);
+		}
+
 		dataLine[flag].push([jsondata[genre][i]["unixtimestamp"],jsondata[genre][i]["totalindex"]]);
 		dataColumn[flag].push([jsondata[genre][i]["unixtimestamp"],jsondata[genre][i]["sale"]]);
 	}
 
+	//console.log(dataLine);
+	console.log(dataColumn);
 	//console.log(stock);
 
 	for (var i=0;i<allNames.length;i++) {
@@ -508,7 +525,26 @@ function redraw_chart() {
 				offset: 0,
 				lineWidth: 2,
 				type: 'logarithmic'
-			}], 
+			}],
+			legend: {
+				enabled: true, 
+				layout: 'horizontal', 
+				floating: false, 
+				itemHoverStyle: {'color': 'blue'}, 
+				itemWidth: 120, 
+				width: 820,
+				navigation: {
+					activeColor: '#3E576F',
+					animation: true,
+					arrowSize: 10,
+					inactiveColor: '#CCC',
+					style: {
+						fontWeight: 'bold',
+						color: '#333',
+						fontSize: '12px'
+					}
+				}
+			},
 			/*tooltip : {
 				valueSuffix: '%', 
 				split: false,
