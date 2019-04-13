@@ -12,8 +12,10 @@
 	<script src="https://img.highcharts.com.cn/highcharts/modules/exporting.js"></script>
 	<script src="https://img.highcharts.com.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
 	<script src="https://img.highcharts.com.cn/highcharts/modules/drag-panes.js"></script>
+	<script src="https://cdn.hcharts.cn/highcharts/modules/no-data-to-display.js"></script>
 	<script src="https://img.hcharts.cn/libs/lodash/dist/lodash.min.js"></script>
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!--script type="text/javascript" src="js/bootstrap-treeview.min.js" ></script-->
 	<link href="content/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
@@ -57,8 +59,78 @@
 				<div class="row" style="height: 80px;">
 					<button type="button" id="display" class="btn btn-default">导入</button>
 				</div>
+
 				<div class="row" style="height: 80px;">
-					<button type="button" id="confirm" class="btn btn-default">返回</button>
+					<button type="button" id="switch" class="btn btn-default">茶青市场</button>
+				</div>
+
+				<div class="row" style="height: 80px;">
+					<button type="button" id="select" class="btn btn-default">筛选</button>
+					<!--div class="tree well" id="treelist" style="display: none;">
+				        <ul>
+				            <li>
+				                <span><i class="icon-folder-open"></i> 顶级节点1</span> <a href="">Goes somewhere</a>
+				                <ul>
+				                    <li>
+				                        <span><i class="icon-minus-sign"></i> 一级节点1</span> <a href=""></a>
+				                        <ul>
+				                            <li>
+				                                <span><i class="icon-leaf"></i> 二级节点1_1</span> <a href=""></a>
+				                            </li>
+				                        </ul>
+				                    </li>
+				                    <li>
+				                        <span><i class="icon-minus-sign"></i> 一级节点2</span> <a href=""></a>
+				                        <ul>
+				                            <li>
+				                                <span><i class="icon-leaf"></i>二级节点2_1</span> <a href=""></a>
+				                            </li>
+				                            <li>
+				                                <span><i class="icon-minus-sign"></i> 二级节点2_2</span> <a href=""></a>
+				                                <ul>
+				                                    <li>
+				                                        <span><i class="icon-minus-sign"></i>三级节点2_1</span> <a href=""></a>
+				                                        <ul>
+				                                            <li>
+				                                                <span><i class="icon-leaf"></i>四级节点2_1</span> <a href=""></a>
+				                                            </li>
+				                                            <li>
+				                                                <span><i class="icon-leaf"></i> 四级节点2_2</span> <a href=""></a>
+				                                            </li>
+				                                        </ul>
+				                                    </li>
+				                                    <li>
+				                                        <span><i class="icon-leaf"></i>三级节点2_2</span> <a href=""></a>
+				                                    </li>
+				                                    <li>
+				                                        <span><i class="icon-leaf"></i> 三级节点2_3</span> <a href=""></a>
+				                                    </li>
+				                                </ul>
+				                            </li>
+				                            <li>
+				                                <span><i class="icon-leaf"></i>二级节点2_3</span> <a href=""></a>
+				                            </li>
+				                        </ul>
+				                    </li>
+				                </ul>
+				            </li>
+				            <li>
+				                <span><i class="icon-folder-open"></i> 顶级节点2</span> <a href=""></a>
+				                <ul>
+				                    <li>
+				                        <span><i class="icon-leaf"></i> 一级节点2_1</span> <a href=""></a>
+				                    </li>
+				                </ul>
+				            </li>
+				        </ul>
+				    </div-->
+				</div>
+
+				<div class="row" style="height: 80px;">
+					<button type="button" id="showall" class="btn btn-default">全部显示</button>
+				</div>
+				<div class="row" style="height: 80px;">
+					<button type="button" id="back" class="btn btn-default">返回</button>
 				</div>
 			</div>
 			<div class="col-md-10 col-lg-10 col-sm-10">
