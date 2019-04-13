@@ -181,14 +181,26 @@ var pifaData = {
 		{"totalindex":68.90,"unixtimestamp":1527868800000,"name":"茉莉花茶","belongtoname":"花茶"}
 	],
 	"FourIndex": [
-		{"totalindex":48.02,"sale":2510.0,"unixtimestamp":1527782400000,"name":"采集标准1","belongtoname":"峨眉山茶"},
-		{"totalindex":51.13,"sale":1789.0,"unixtimestamp":1527782400000,"name":"采集标准2","belongtoname":"峨眉山茶"},
-		{"totalindex":22.80,"sale":3303.0,"unixtimestamp":1527782400000,"name":"采集标准3","belongtoname":"峨眉山茶"},
-		{"totalindex":61.11,"sale":1960.0,"unixtimestamp":1527782400000,"name":"采集标准4","belongtoname":"峨眉山茶"},
-		{"totalindex":47.56,"sale":2349.0,"unixtimestamp":1527868800000,"name":"采集标准1","belongtoname":"峨眉山茶"},
-		{"totalindex":53.31,"sale":2011.0,"unixtimestamp":1527868800000,"name":"采集标准2","belongtoname":"峨眉山茶"},
-		{"totalindex":41.54,"sale":4631.0,"unixtimestamp":1527868800000,"name":"采集标准3","belongtoname":"峨眉山茶"},
-		{"totalindex":60.62,"sale":1955.0,"unixtimestamp":1527868800000,"name":"采集标准4","belongtoname":"峨眉山茶"}
+		{"totalindex":48.02,"sale":2510.0,"unixtimestamp":1527782400000,"name":"单芽","belongtoname":"峨眉山茶"},
+		{"totalindex":51.13,"sale":1789.0,"unixtimestamp":1527782400000,"name":"一芽一叶","belongtoname":"峨眉山茶"},
+		{"totalindex":22.80,"sale":3303.0,"unixtimestamp":1527782400000,"name":"一芽二叶","belongtoname":"峨眉山茶"},
+		{"totalindex":61.11,"sale":1960.0,"unixtimestamp":1527782400000,"name":"一芽三叶","belongtoname":"峨眉山茶"},
+		{"totalindex":48.02,"sale":2510.0,"unixtimestamp":1527782400000,"name":"一芽四叶","belongtoname":"峨眉山茶"},
+		{"totalindex":58.13,"sale":1689.0,"unixtimestamp":1527782400000,"name":"小开面","belongtoname":"峨眉山茶"},
+		{"totalindex":28.80,"sale":3103.0,"unixtimestamp":1527782400000,"name":"中开面","belongtoname":"峨眉山茶"},
+		{"totalindex":68.11,"sale":1560.0,"unixtimestamp":1527782400000,"name":"大开面","belongtoname":"峨眉山茶"},
+		{"totalindex":24.80,"sale":3003.0,"unixtimestamp":1527782400000,"name":"单片","belongtoname":"峨眉山茶"},
+		{"totalindex":64.11,"sale":1760.0,"unixtimestamp":1527782400000,"name":"机采","belongtoname":"峨眉山茶"},
+		{"totalindex":44.56,"sale":2449.0,"unixtimestamp":1527868800000,"name":"单芽","belongtoname":"峨眉山茶"},
+		{"totalindex":54.31,"sale":2411.0,"unixtimestamp":1527868800000,"name":"一芽一叶","belongtoname":"峨眉山茶"},
+		{"totalindex":44.54,"sale":4331.0,"unixtimestamp":1527868800000,"name":"一芽二叶","belongtoname":"峨眉山茶"},
+		{"totalindex":65.62,"sale":1555.0,"unixtimestamp":1527868800000,"name":"一芽三叶","belongtoname":"峨眉山茶"},
+		{"totalindex":45.02,"sale":2010.0,"unixtimestamp":1527868800000,"name":"一芽四叶","belongtoname":"峨眉山茶"},
+		{"totalindex":55.13,"sale":1989.0,"unixtimestamp":1527868800000,"name":"小开面","belongtoname":"峨眉山茶"},
+		{"totalindex":27.80,"sale":3503.0,"unixtimestamp":1527868800000,"name":"中开面","belongtoname":"峨眉山茶"},
+		{"totalindex":67.11,"sale":1660.0,"unixtimestamp":1527868800000,"name":"大开面","belongtoname":"峨眉山茶"},
+		{"totalindex":27.80,"sale":3203.0,"unixtimestamp":1527868800000,"name":"单片","belongtoname":"峨眉山茶"},
+		{"totalindex":60.11,"sale":1760.0,"unixtimestamp":1527868800000,"name":"机采","belongtoname":"峨眉山茶"}
 	]
 };
 
@@ -432,7 +444,8 @@ function redraw_chart() {
 			}
 			//console.log(flag);
 			
-			// delete this
+			// delete this if there are data in "TwoIndex" serires
+			/*
 			if (genre=="TwoIndex") {
 				var total = 0;
 				for (var s=0;s<jsondata["ThreeIndex"].length;s++) {
@@ -447,7 +460,7 @@ function redraw_chart() {
 				jsondata["TwoIndex"][i]["sale"] = total;
 				//console.log(jsondata["ThreeIndex"][s]);
 			}
-			
+			*/
 
 			dataLine[flag].push([jsondata[genre][i]["unixtimestamp"],jsondata[genre][i]["totalindex"]]);
 			dataColumn[flag].push([jsondata[genre][i]["unixtimestamp"],jsondata[genre][i]["sale"]]);
@@ -971,6 +984,8 @@ function redraw_chart() {
 
 
 $('#back').click(function(){
+	var old = jsondata[genre][0].belongtoname;
+	//console.log(old);
 	switch (genre) {
 		case "AllIndex":
 			return;
@@ -986,7 +1001,13 @@ $('#back').click(function(){
 		default:
 			genre = "ThreeIndex";
 	}
-	parent = "";
+	for (var i=0;i<jsondata[genre].length;i++) {
+		if (jsondata[genre][i].name==old) {
+			parent = jsondata[genre][i].belongtoname;
+			break;
+		}
+	}
+	//console.log(parent);
 	redraw_chart();
 });
 
