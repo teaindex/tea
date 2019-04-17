@@ -194,7 +194,7 @@ Highcharts.setOptions({
 	}
 });
 
-Highcharts.stockChart('container00', {
+Highcharts.stockChart('containerA', {
 	rangeSelector : {
 			selected : 2,
 			inputDateFormat: '%Y-%m-%d'
@@ -203,7 +203,124 @@ Highcharts.stockChart('container00', {
 			text : '茶指数'
 	},
 	chart : {
-		height : '60%', 
+		height : '100%', 
+		spacingBottom: 15,
+		backgroundColor: {
+			linearGradient: [0, 0, 500, 500],
+				stops: [
+					[0, 'rgb(255, 255, 255)'],
+					[1, 'rgb(240, 240, 255)']
+				]
+		}
+	}, 
+	exporting : {
+		allowHTML: true
+	},
+	xAxis : {
+		type: 'datetime',
+		labels: {
+			format: '{value:%B%e日}'
+		}
+	},
+	yAxis : [{
+		x: -3,
+		title: {
+			text: "指数"
+		}, 
+		labels: {
+			align: "right", 
+			x: -3
+		}, 
+		height: '65%',
+		resize: {
+			enabled: true
+		},
+		lineWidth: 2,
+		type: 'logarithmic'
+	}, {
+		title: {
+			text: "销售额"
+		}, 
+		labels: {
+			align: "right", 
+			x: -3
+		}, 
+		top: '65%', 
+		height: '35%', 
+		offset: 0,
+		lineWidth: 2
+	}], 
+	legend: {
+		enabled: true, 
+		layout: 'horizontal', 
+		floating: false, 
+		itemHoverStyle: {'color': 'blue'}, 
+		itemWidth: 120, 
+		width: 820,
+		navigation: {
+			activeColor: '#3E576F',
+			animation: true,
+			arrowSize: 10,
+			inactiveColor: '#CCC',
+			style: {
+				fontWeight: 'bold',
+				color: '#333',
+				fontSize: '12px'
+			}
+		}
+	},
+	/*tooltip : {
+		valueSuffix: '%', 
+		split: false,
+		//shared: true
+	},*/
+	plotOptions : {
+		line: {
+			connectNulls: true, 
+			gapSize: 5
+		}, 
+		series: {
+			cursor: 'pointer', 
+			showInNavigator: true, 
+			events: {
+				legendItemClick: function (event) {
+					var same = this.name;
+					//console.log(this.name);
+					//console.log(this.userOptions.type);
+					var legends = (this.userOptions.type=="line") ? 
+						$('.highcharts-legend-item.highcharts-column-series') : 
+						$('.highcharts-legend-item.highcharts-line-series');
+					if (limitor)
+						return true;
+					for (var m=0;m<legends.length;m++) {
+						//console.log(legends[m]);
+						var found = legends.eq(m).find('tspan');
+						//console.log(found[0].innerHTML);
+						if (found[0].innerHTML==same) {
+							limitor = true;
+							legends.eq(m).click();
+							limitor = false;
+							break;
+						}
+					}
+					return true;
+				}
+			}
+		}
+	},
+
+	series : stock
+});
+Highcharts.stockChart('containerB', {
+	rangeSelector : {
+			selected : 2,
+			inputDateFormat: '%Y-%m-%d'
+	},
+	title : {
+			text : '茶指数'
+	},
+	chart : {
+		height : '100%', 
 		spacingBottom: 15,
 		backgroundColor: {
 			linearGradient: [0, 0, 500, 500],
@@ -563,7 +680,7 @@ function redraw_chart() {
 		}
 	}
 
-	Highcharts.stockChart('container00', {
+	Highcharts.stockChart('containerA', {
 			rangeSelector : {
 					selected : 2,
 					inputDateFormat: '%Y-%m-%d'
@@ -572,7 +689,115 @@ function redraw_chart() {
 					text : '茶指数'
 			},
 			chart : {
-				height : '60%', 
+				height : '100%', 
+				spacingBottom: 15,
+				backgroundColor: {
+					linearGradient: [0, 0, 500, 500],
+						stops: [
+							[0, 'rgb(255, 255, 255)'],
+							[1, 'rgb(240, 240, 255)']
+						]
+				}
+			}, 
+			yAxis : [{
+				x: -3,
+				title: {
+					text: "指数"
+				}, 
+				labels: {
+					align: "right", 
+					x: -3
+				}, 
+				height: '65%',
+				resize: {
+					enabled: true
+				},
+				lineWidth: 2
+			}, {
+				title: {
+					text: "销售额"
+				}, 
+				labels: {
+					align: "right", 
+					x: -3
+				}, 
+				top: '65%', 
+				height: '35%', 
+				offset: 0,
+				lineWidth: 2,
+				type: 'logarithmic'
+			}],
+			legend: {
+				enabled: true, 
+				layout: 'horizontal', 
+				floating: false, 
+				itemHoverStyle: {'color': 'blue'}, 
+				itemWidth: 120, 
+				width: 820,
+				navigation: {
+					activeColor: '#3E576F',
+					animation: true,
+					arrowSize: 10,
+					inactiveColor: '#CCC',
+					style: {
+						fontWeight: 'bold',
+						color: '#333',
+						fontSize: '12px'
+					}
+				}
+			},
+			/*tooltip : {
+				valueSuffix: '%', 
+				split: false,
+				//shared: true
+			},*/
+			plotOptions : {
+				line: {
+					connectNulls: true, 
+					gapSize: 5
+				}, 
+				series: {
+					cursor: 'pointer', 
+					showInNavigator: true, 
+					events: {
+						legendItemClick: function (event) {
+							var same = this.name;
+							//console.log(this.name);
+							//console.log(this.userOptions.type);
+							var legends = (this.userOptions.type=="line") ? 
+								$('.highcharts-legend-item.highcharts-column-series') : 
+								$('.highcharts-legend-item.highcharts-line-series');
+							if (limitor)
+								return true;
+							for (var m=0;m<legends.length;m++) {
+								//console.log(legends[m]);
+								var found = legends.eq(m).find('tspan');
+								//console.log(found[0].innerHTML);
+								if (found[0].innerHTML==same) {
+									limitor = true;
+									legends.eq(m).click();
+									limitor = false;
+									break;
+								}
+							}
+							return true;
+						}
+					}
+				}
+			},
+
+			series : stock
+	});
+	Highcharts.stockChart('containerB', {
+			rangeSelector : {
+					selected : 2,
+					inputDateFormat: '%Y-%m-%d'
+			},
+			title : {
+					text : '茶指数'
+			},
+			chart : {
+				height : '100%', 
 				spacingBottom: 15,
 				backgroundColor: {
 					linearGradient: [0, 0, 500, 500],
@@ -954,7 +1179,7 @@ $('#showall').click(function() {
 		}
 	}
 
-	Highcharts.stockChart('container00', {
+	Highcharts.stockChart('containerA', {
 			rangeSelector : {
 					selected : 2,
 					inputDateFormat: '%Y-%m-%d'
@@ -963,7 +1188,115 @@ $('#showall').click(function() {
 					text : '茶指数'
 			},
 			chart : {
-				height : '60%', 
+				height : '100%', 
+				spacingBottom: 15,
+				backgroundColor: {
+					linearGradient: [0, 0, 500, 500],
+						stops: [
+							[0, 'rgb(255, 255, 255)'],
+							[1, 'rgb(240, 240, 255)']
+						]
+				}
+			}, 
+			yAxis : [{
+				x: -3,
+				title: {
+					text: "指数"
+				}, 
+				labels: {
+					align: "right", 
+					x: -3
+				}, 
+				height: '65%',
+				resize: {
+					enabled: true
+				},
+				lineWidth: 2
+			}, {
+				title: {
+					text: "销售额"
+				}, 
+				labels: {
+					align: "right", 
+					x: -3
+				}, 
+				top: '65%', 
+				height: '35%', 
+				offset: 0,
+				lineWidth: 2,
+				type: 'logarithmic'
+			}],
+			legend: {
+				enabled: true, 
+				layout: 'horizontal', 
+				floating: false, 
+				itemHoverStyle: {'color': 'blue'}, 
+				itemWidth: 120, 
+				width: 820,
+				navigation: {
+					activeColor: '#3E576F',
+					animation: true,
+					arrowSize: 10,
+					inactiveColor: '#CCC',
+					style: {
+						fontWeight: 'bold',
+						color: '#333',
+						fontSize: '12px'
+					}
+				}
+			},
+			/*tooltip : {
+				valueSuffix: '%', 
+				split: false,
+				//shared: true
+			},*/
+			plotOptions : {
+				line: {
+					connectNulls: true, 
+					gapSize: 5
+				}, 
+				series: {
+					cursor: 'pointer', 
+					showInNavigator: true, 
+					events: {
+						legendItemClick: function (event) {
+							var same = this.name;
+							//console.log(this.name);
+							//console.log(this.userOptions.type);
+							var legends = (this.userOptions.type=="line") ? 
+								$('.highcharts-legend-item.highcharts-column-series') : 
+								$('.highcharts-legend-item.highcharts-line-series');
+							if (limitor)
+								return true;
+							for (var m=0;m<legends.length;m++) {
+								//console.log(legends[m]);
+								var found = legends.eq(m).find('tspan');
+								//console.log(found[0].innerHTML);
+								if (found[0].innerHTML==same) {
+									limitor = true;
+									legends.eq(m).click();
+									limitor = false;
+									break;
+								}
+							}
+							return true;
+						}
+					}
+				}
+			},
+
+			series : stock
+	});
+	Highcharts.stockChart('containerB', {
+			rangeSelector : {
+					selected : 2,
+					inputDateFormat: '%Y-%m-%d'
+			},
+			title : {
+					text : '茶指数'
+			},
+			chart : {
+				height : '100%', 
 				spacingBottom: 15,
 				backgroundColor: {
 					linearGradient: [0, 0, 500, 500],

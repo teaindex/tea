@@ -1,4 +1,4 @@
-var chaqingData = {
+var pifaData = {
 	"AllIndex":[
 		{"totalindex":90.58,"sale":3132993.0,"unixtimestamp":1527782400000},
 		{"totalindex":85.15,"sale":3537018.0,"unixtimestamp":1527868800000}
@@ -90,7 +90,7 @@ var chaqingData = {
 	]
 };
 
-var pifaData = {
+var chaqingData = {
 	"AllIndex":[
 		{"totalindex":90.58,"sale":3132993.0,"unixtimestamp":1527782400000},
 		{"totalindex":85.15,"sale":3537018.0,"unixtimestamp":1527868800000}
@@ -204,7 +204,7 @@ var pifaData = {
 	]
 };
 
-var jsondata = chaqingData;
+var jsondata = pifaData;
 
 var source = "PiFa";
 
@@ -1034,14 +1034,14 @@ $('#switch').click(function() {
 	if ($('#switch').text()=="茶青市场") {
 		$('#switch').text("批发市场");
 		source = "ChaQing";
-		jsondata = pifaData;
+		jsondata = chaqingData;
 		genre = "AllIndex";
 		redraw_chart();
 	}
 	else {
 		$('#switch').text("茶青市场");
 		source = "Pifa";
-		jsondata = chaqingData;
+		jsondata = pifaData;
 		genre = "AllIndex";
 		redraw_chart();
 	}

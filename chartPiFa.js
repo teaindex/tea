@@ -87,28 +87,6 @@ var jsondata = {
 		{"totalindex":86.75,"unixtimestamp":1527868800000,"name":"黄芽茶","belongtoname":"黄茶"},
 		{"totalindex":69.49,"unixtimestamp":1527782400000,"name":"茉莉花茶","belongtoname":"花茶"},
 		{"totalindex":68.90,"unixtimestamp":1527868800000,"name":"茉莉花茶","belongtoname":"花茶"}
-	],
-	"FourIndex": [
-		{"totalindex":48.02,"sale":2510.0,"unixtimestamp":1527782400000,"name":"单芽","belongtoname":"峨眉山茶"},
-		{"totalindex":51.13,"sale":1789.0,"unixtimestamp":1527782400000,"name":"一芽一叶","belongtoname":"峨眉山茶"},
-		{"totalindex":22.80,"sale":3303.0,"unixtimestamp":1527782400000,"name":"一芽二叶","belongtoname":"峨眉山茶"},
-		{"totalindex":61.11,"sale":1960.0,"unixtimestamp":1527782400000,"name":"一芽三叶","belongtoname":"峨眉山茶"},
-		{"totalindex":48.02,"sale":2510.0,"unixtimestamp":1527782400000,"name":"一芽四叶","belongtoname":"峨眉山茶"},
-		{"totalindex":58.13,"sale":1689.0,"unixtimestamp":1527782400000,"name":"小开面","belongtoname":"峨眉山茶"},
-		{"totalindex":28.80,"sale":3103.0,"unixtimestamp":1527782400000,"name":"中开面","belongtoname":"峨眉山茶"},
-		{"totalindex":68.11,"sale":1560.0,"unixtimestamp":1527782400000,"name":"大开面","belongtoname":"峨眉山茶"},
-		{"totalindex":24.80,"sale":3003.0,"unixtimestamp":1527782400000,"name":"单片","belongtoname":"峨眉山茶"},
-		{"totalindex":64.11,"sale":1760.0,"unixtimestamp":1527782400000,"name":"机采","belongtoname":"峨眉山茶"},
-		{"totalindex":44.56,"sale":2449.0,"unixtimestamp":1527868800000,"name":"单芽","belongtoname":"峨眉山茶"},
-		{"totalindex":54.31,"sale":2411.0,"unixtimestamp":1527868800000,"name":"一芽一叶","belongtoname":"峨眉山茶"},
-		{"totalindex":44.54,"sale":4331.0,"unixtimestamp":1527868800000,"name":"一芽二叶","belongtoname":"峨眉山茶"},
-		{"totalindex":65.62,"sale":1555.0,"unixtimestamp":1527868800000,"name":"一芽三叶","belongtoname":"峨眉山茶"},
-		{"totalindex":45.02,"sale":2010.0,"unixtimestamp":1527868800000,"name":"一芽四叶","belongtoname":"峨眉山茶"},
-		{"totalindex":55.13,"sale":1989.0,"unixtimestamp":1527868800000,"name":"小开面","belongtoname":"峨眉山茶"},
-		{"totalindex":27.80,"sale":3503.0,"unixtimestamp":1527868800000,"name":"中开面","belongtoname":"峨眉山茶"},
-		{"totalindex":67.11,"sale":1660.0,"unixtimestamp":1527868800000,"name":"大开面","belongtoname":"峨眉山茶"},
-		{"totalindex":27.80,"sale":3203.0,"unixtimestamp":1527868800000,"name":"单片","belongtoname":"峨眉山茶"},
-		{"totalindex":60.11,"sale":1760.0,"unixtimestamp":1527868800000,"name":"机采","belongtoname":"峨眉山茶"}
 	]
 };
 
@@ -347,6 +325,24 @@ function redraw_chart() {
 			flag = allNames.length-1;
 		}
 		//console.log(flag);
+		
+		// delete this if there are data in "TwoIndex" serires
+		/*
+		if (genre=="TwoIndex") {
+			var total = 0;
+			for (var s=0;s<jsondata["ThreeIndex"].length;s++) {
+				if (thisName!=jsondata["ThreeIndex"][s]["belongtoname"] || 
+						jsondata["ThreeIndex"][s]["unixtimestamp"]!=jsondata["TwoIndex"][i]["unixtimestamp"])
+					continue;
+				//console.log(total);
+				//console.log(jsondata["ThreeIndex"][s]["sale"]);
+				total += jsondata["ThreeIndex"][s]["sale"];
+				//console.log(total);
+			}
+			jsondata["TwoIndex"][i]["sale"] = total;
+			//console.log(jsondata["ThreeIndex"][s]);
+		}
+		*/
 
 		dataLine[flag].push([jsondata[genre][i]["unixtimestamp"],jsondata[genre][i]["totalindex"]]);
 		dataColumn[flag].push([jsondata[genre][i]["unixtimestamp"],jsondata[genre][i]["sale"]]);
@@ -374,8 +370,7 @@ function redraw_chart() {
 						parent = this.getName();//console.log(this.getName());
 						redraw_chart();
 					}
-				},
-				visible: visibility
+				}
 			}, {
 			// 解析柱状图数据
 				type: 'column',
@@ -393,8 +388,7 @@ function redraw_chart() {
 						parent = this.getName();//console.log(this.getName());
 						redraw_chart();
 					}
-				},
-				visible: visibility
+				}
 			});
 		}
 		else if (genre=="OneIndex") {
@@ -472,47 +466,6 @@ function redraw_chart() {
 				events: {
 					click: function() {
 						genre = "ThreeIndex";
-						parent = this.getName();//console.log(this.getName());
-						redraw_chart();
-					}
-				},
-				visible: visibility
-			});
-		}
-		else if (genre=="ThreeIndex") {
-			var visibility = i==0 ? true : false;
-			stock.push({
-			// 解析折线图数据
-				type: 'line',
-				name: allNames[i],
-				data: dataLine[i],
-				tooltip: {
-					valuePrefix: "类指数：",
-					valueSuffix: "%",
-					xDateFormat: '%Y年%B%e日'
-				},
-				events: {
-					click: function() {
-						genre = "FourIndex";
-						parent = this.getName();//console.log(this.getName());
-						redraw_chart();
-					}
-				},
-				visible: visibility
-			}, {
-			// 解析柱状图数据
-				type: 'column',
-				yAxis: 1,
-				name: allNames[i],
-				data: dataColumn[i],
-				tooltip: {
-					valuePrefix: "销售额：",
-					valueSuffix: "万元",
-					xDateFormat: '%Y年%B%e日'
-				},
-				events: {
-					click: function() {
-						genre = "FourIndex";
 						parent = this.getName();//console.log(this.getName());
 						redraw_chart();
 					}
@@ -704,23 +657,11 @@ $('#back').click(function(){
 });
 
 $('#display').click(function(){
-	$.ajax({
-		url: "http://cccqqf.top:8081/test/salesandindex",
-		type: "POST",
-		dataType: "json",
-		async: true,
-		data : [label1,label2],
-		success: function(data){
-		    jsondata = $.parseJSON(data);
-		    alert(object);
-		    redraw_chart();
-		},
-		error: function(msg){
-			alert("!!!ERROR");
-			console.log(msg);
-		}
+	$.get("http://cccqqf.top:8081/test/get?class=0",function(data,status) {
+		console.log(data);
 	});
 });
+
 
 $('#showall').click(function() {
 	stock = [];
@@ -733,7 +674,6 @@ $('#showall').click(function() {
 	/*jsondata[genre] = _.sortBy(jsondata[genre], function(d) {
         return d[0];
     });*/
-    
 	for (var i=0;i<jsondata[genre].length;i++) {
 		var thisName = genre=="AllIndex" ? "总计" : jsondata[genre][i]["name"];
 		if (genre!="AllIndex" && genre!="OneIndex" && parent!="")
@@ -752,6 +692,23 @@ $('#showall').click(function() {
 			flag = allNames.length-1;
 		}
 		//console.log(flag);
+		
+		// delete this
+		if (genre=="TwoIndex") {
+			var total = 0;
+			for (var s=0;s<jsondata["ThreeIndex"].length;s++) {
+				if (thisName!=jsondata["ThreeIndex"][s]["belongtoname"] || 
+						jsondata["ThreeIndex"][s]["unixtimestamp"]!=jsondata["TwoIndex"][i]["unixtimestamp"])
+					continue;
+				//console.log(total);
+				//console.log(jsondata["ThreeIndex"][s]["sale"]);
+				total += jsondata["ThreeIndex"][s]["sale"];
+				//console.log(total);
+			}
+			jsondata["TwoIndex"][i]["sale"] = total;
+			//console.log(jsondata["ThreeIndex"][s]);
+		}
+		
 
 		dataLine[flag].push([jsondata[genre][i]["unixtimestamp"],jsondata[genre][i]["totalindex"]]);
 		dataColumn[flag].push([jsondata[genre][i]["unixtimestamp"],jsondata[genre][i]["sale"]]);
@@ -870,44 +827,6 @@ $('#showall').click(function() {
 				events: {
 					click: function() {
 						genre = "ThreeIndex";
-						parent = this.getName();//console.log(this.getName());
-						redraw_chart();
-					}
-				}
-			});
-		}
-		else if (genre=="ThreeIndex") {
-			stock.push({
-			// 解析折线图数据
-				type: 'line',
-				name: allNames[i],
-				data: dataLine[i],
-				tooltip: {
-					valuePrefix: "类指数：",
-					valueSuffix: "%",
-					xDateFormat: '%Y年%B%e日'
-				},
-				events: {
-					click: function() {
-						genre = "FourIndex";
-						parent = this.getName();//console.log(this.getName());
-						redraw_chart();
-					}
-				}
-			}, {
-			// 解析柱状图数据
-				type: 'column',
-				yAxis: 1,
-				name: allNames[i],
-				data: dataColumn[i],
-				tooltip: {
-					valuePrefix: "销售额：",
-					valueSuffix: "万元",
-					xDateFormat: '%Y年%B%e日'
-				},
-				events: {
-					click: function() {
-						genre = "FourIndex";
 						parent = this.getName();//console.log(this.getName());
 						redraw_chart();
 					}

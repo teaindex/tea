@@ -1,0 +1,74 @@
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Access-Control-Allow-Origin" content="*">
+	<title>茶指数 demo </title>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<!--script src="highcharts.src.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts.src.js"></script-->
+	<!--script src="https://cdn.highcharts.com.cn/highstock/highstock.js"></script-->
+	<!--script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script-->
+	<script src="https://img.highcharts.com.cn/highstock/highstock.js"></script>
+	<script src="https://img.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+	<script src="https://img.highcharts.com.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+	<script src="https://img.highcharts.com.cn/highcharts/modules/drag-panes.js"></script>
+	<script src="https://cdn.hcharts.cn/highcharts/modules/no-data-to-display.js"></script>
+	<script src="https://img.hcharts.cn/libs/lodash/dist/lodash.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!--script type="text/javascript" src="js/bootstrap-treeview.min.js" ></script-->
+	<link href="content/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="chart" class="col-md-8 col-lg-8 col-sm-8 col-md-offset-2" 
+			style="font-size: 160%; z-index: 100;">
+		<div class="row">
+			<div>
+				<div class="btn-group" style="margin-left: 12px; margin-right: 12px;">
+					<button type="button" class="btn btn-default" id="slc1">
+						定基
+					</button>
+					<button type="button" class="btn btn-default dropdown-toggle" 
+							data-toggle="dropdown" style="height: 34px;">
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a id="slc10">定基</a></li>
+						<li><a id="slc11">同比</a></li>
+						<li><a id="slc12">环比</a></li>
+					</ul>
+				</div>
+				<div class="btn-group" style="margin-left: 12px; margin-right: 12px;">
+					<button type="button" class="btn btn-default" id="slc2">
+						日指数
+					</button>
+					<button type="button" class="btn btn-default dropdown-toggle" 
+							data-toggle="dropdown" style="height: 34px;">
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a id="slc20">日指数</a></li>
+						<li><a id="slc21">周指数</a></li>
+						<li><a id="slc22">月指数</a></li>
+					</ul>
+				</div>
+				<button type="button" id="display" class="btn btn-default" style="margin-left: 12px; margin-right: 12px;">导入</button>
+
+				<button type="button" id="select" class="btn btn-default" style="margin-left: 12px; margin-right: 12px;">筛选</button>
+
+				<button type="button" id="showall" class="btn btn-default" style="margin-left: 12px; margin-right: 12px;">全部显示</button>
+				<button type="button" id="back" class="btn btn-default" style="margin-left: 12px; margin-right: 12px;">返回</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10 col-lg-10 col-sm-10">
+				<div id="container"></div>
+			</div>
+			<div class="col-md-10 col-lg-10 col-sm-10">
+				<div id="container00"></div>
+			</div>
+		</div>
+	</div>
+	<!--script language="JavaScript" src="chart.js"></script-->
+	<script language="JavaScript" src="sglchart.js"></script>
+</body>
+</html>

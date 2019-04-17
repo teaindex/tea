@@ -704,21 +704,8 @@ $('#back').click(function(){
 });
 
 $('#display').click(function(){
-	$.ajax({
-		url: "http://cccqqf.top:8081/test/salesandindex",
-		type: "POST",
-		dataType: "json",
-		async: true,
-		data : [label1,label2],
-		success: function(data){
-		    jsondata = $.parseJSON(data);
-		    alert(object);
-		    redraw_chart();
-		},
-		error: function(msg){
-			alert("!!!ERROR");
-			console.log(msg);
-		}
+	$.get("http://cccqqf.top:8081/test/get?class=0",function(data,status) {
+		console.log(data);
 	});
 });
 
