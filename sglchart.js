@@ -545,6 +545,9 @@ function redraw_chart() {
 								}
 							]
 				},
+				exporting : {
+					allowHTML: true
+				},
 				title : {
 						text : '茶指数'
 				},
@@ -969,6 +972,9 @@ function redraw_chart() {
 							}
 						]
 				},
+				exporting : {
+					allowHTML: true
+				},
 				title : {
 						text : '茶指数'
 				},
@@ -1385,6 +1391,9 @@ function redraw_chart() {
 									text: 'All'
 								}
 							]
+				},
+				exporting : {
+					allowHTML: true
 				},
 				title : {
 						text : '茶指数'
@@ -1844,6 +1853,9 @@ $('#showall').click(function() {
 								}
 							]
 				},
+				exporting : {
+					allowHTML: true
+				},
 				title : {
 						text : '茶指数'
 				},
@@ -2015,7 +2027,7 @@ $('#showall').click(function() {
 			//1515079180800
 			dataLine[flag].push([UnixTime,jsondataWeek[genre][i][keyName]]);
 			dataColumn[flag].push([UnixTime,jsondataWeek[genre][i]["sales_money"]]);
-			weekNumber.push(jsondataWeek[genre][i]["week"]);
+			weekNumber.push({UnixTime: jsondataWeek[genre][i]["week"]});
 			//console.log("weekNumber["+(weekNumber.length-1)+"] = "+jsondataWeek[genre][i]["week"]);
 		}
 
@@ -2253,6 +2265,9 @@ $('#showall').click(function() {
 								text: 'All'
 							}
 						]
+				},
+				exporting : {
+					allowHTML: true
 				},
 				title : {
 						text : '茶指数'
@@ -2657,6 +2672,9 @@ $('#showall').click(function() {
 								}
 							]
 				},
+				exporting : {
+					allowHTML: true
+				},
 				title : {
 						text : '茶指数'
 				},
@@ -2882,3 +2900,25 @@ $('#slc22').click(function() {
 	}
 	try{redraw_chart();}catch(error){}
 });
+
+var here;
+
+function output() {
+	try {
+		if (label2!="WeekIndex")
+			return;
+		here = d3.select("#chart").select("#container00").select(".highcharts-container").select("svg")
+					.select(".highcharts-tooltip").select("text").select("tspan");
+		if ((here.html()).indexOf("月")==-1)
+			return;
+		var monthD = 0;
+		for (var i=0;i<parseInt(here.html().slice(5,(here.html()).indexOf("月")));i++)
+			monthD += monthDay[i];
+		monthD += parseInt(here.html().slice((here.html()).indexOf("月")+1,(here.html()).indexOf("日")));
+		here.html(parseInt(here.html().slice(0,5))+"年 第 "+parseInt(monthD/7)+" 周");
+	}
+	catch (error) {}
+}
+setInterval("output()",30);
+
+var monthDay = [0,31,28,31,30,31,30,31,31,30,31,30,31];
